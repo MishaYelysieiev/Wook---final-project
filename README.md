@@ -1,6 +1,6 @@
-#WOOK
+# WOOK
 
-####To start your first line of code:<br>
+#### To start your first line of code:<br>
 
 1. Clone this repository by `git clone https://github.com/MishaYelysieiev/Wook-final-project.git`
 2. Run `npm i` to install all packages from dependencies
