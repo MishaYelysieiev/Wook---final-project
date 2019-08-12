@@ -32,10 +32,10 @@ router.get('/category/:id', function(req, res) {
     return Category.findById(req.params.id, function (err, category) {
         if(!category) {
             res.statusCode = 404;
-            return res.send({ error: 'Not found' });
+            return res.send({ success: false, error: 'Not found' });
         }
         if (!err) {
-            return res.send({ status: 'OK', article:category });
+            return res.send({ status: 'OK', category:category });
         } else {
             res.statusCode = 500;
             // log.error('Internal error(%d): %s',res.statusCode,err.message);
