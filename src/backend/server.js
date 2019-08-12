@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-// const Data = require('./data');
+const Category = require('./models/category');
 
 const API_PORT = 3000;
 const app = express();
@@ -26,6 +26,14 @@ db.once('open', () => console.log('connected to the database'));
 
 // checks if connection with the database is successful
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+// Get one of our category
+router.get("/category/:id", (req, res) => {
+    Category.findOne({ _id: req.params.id }).then(category => {
+        res.json(category);
+    });
+});
+
 
 
 
