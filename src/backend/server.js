@@ -28,9 +28,19 @@ db.once('open', () => console.log('connected to the database'));
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // Get one of our category
-router.get("/category/:id", (req, res) => {
-    Category.findOne({ _id: req.params.id }).then(category => {
-        res.json(category);
+router.get('/category/:id', function(req, res) {
+    return Category.findById(req.params.id, function (err, category) {
+        if(!category) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+        if (!err) {
+            return res.send({ status: 'OK', category:category });
+        } else {
+            res.statusCode = 500;
+            log.error('Internal error(%d): %s',res.statusCode,err.message);
+            return res.send({ error: 'Server error' });
+        }
     });
 });
 
