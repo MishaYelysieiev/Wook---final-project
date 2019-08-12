@@ -35,10 +35,10 @@ router.get('/category/:id', function(req, res) {
             return res.send({ error: 'Not found' });
         }
         if (!err) {
-            return res.send({ status: 'OK', category:category });
+            return res.send({ status: 'OK', article:category });
         } else {
             res.statusCode = 500;
-            log.error('Internal error(%d): %s',res.statusCode,err.message);
+            // log.error('Internal error(%d): %s',res.statusCode,err.message);
             return res.send({ error: 'Server error' });
         }
     });
