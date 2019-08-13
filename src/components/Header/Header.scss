@@ -1,0 +1,169 @@
+.Header {
+  position: fixed;
+  z-index: 99999;
+
+  &_wrapper {
+    padding: 22px 110px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(19, 68, 66, 0.25);
+
+  }
+}
+
+.nav {
+  font-weight: 600;
+  font-size: 24px;
+  color: #134442;
+  transition: 0.4s;
+
+  &.hidden {
+    opacity: 0;
+  }
+
+  &_link {
+    margin: 0 24px;
+    position: relative;
+    padding: 0 9px;
+
+    &:after {
+      transition: 0.4s;
+      content: "";
+      display: block;
+      background-color: #9AE5E6;
+      height: 3px;
+      border-radius: 5px;
+      position: absolute;
+      width: 0;
+      left: 0;
+      right: 0;
+      margin-top: 5px;
+
+    }
+
+    &:hover {
+      &:after {
+        width: 100%;
+      }
+    }
+
+  }
+}
+
+.category {
+  position: absolute;
+  display: flex;
+  padding: 0 10vw;
+  height: 70px;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #fff;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+  z-index: -1;
+  transition: 0.4s;
+
+  &_item {
+    font-weight: 600;
+    font-size: 20px;
+    color: #134442;
+    transition: 0.4s;
+    position: relative;
+
+    &:hover {
+      color: #9AE5E6;
+      transform: scale(1.2);
+
+    }
+  }
+
+  &.opened {
+    transform: translateY(0%);
+  }
+}
+
+.contact {
+  font-size: 14px;
+  color: #775B59;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-self: normal;
+
+  &_item {
+    display: flex;
+    align-items: center;
+
+    & p {
+      margin-left: 14px;
+    }
+  }
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+
+  &_link {
+    display: flex;
+    align-items: center;
+    margin: 0 22px;
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.search {
+  transition: 0.4s;
+
+  &_input {
+    height: 215%;
+    font-size: 20px;
+    position: absolute;
+    transform: translateX(-95%);
+    outline-style: none;
+    border: none;
+    z-index: -1;
+    width: 0;
+    transition: 0.4s;
+    font-weight: 600;
+
+    &.opened {
+      width: 55vw;
+      border-bottom: 1px solid #331B22;
+    }
+  }
+
+  &_icon {
+    cursor: pointer;
+    transition: 0.4s;
+
+    &.opened {
+      margin-right: 3vw;
+
+      & .iconItem{
+        fill: #9AE5E6;
+      }
+
+    }
+  }
+
+  &.opened {
+    height: 100%;
+  }
+
+}
+
+.iconItem {
+  transition: 0.4s;
+}
+
+.iconWrapper:hover .iconItem {
+  fill: #9AE5E6;
+}
+
