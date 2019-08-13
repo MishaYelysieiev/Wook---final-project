@@ -5,6 +5,7 @@ import {reducer as formReducer} from 'redux-form';
 
 import Header from './components/Header/Header';
 import HomePage from './components/HomePage/HomePage';
+import CategorySection from './components/CategorySection/CategorySection';
 
 import './App.scss';
 
@@ -12,10 +13,13 @@ function App() {
     return (
         <div className="App">
             <Header/>
-            <Route path='/' component={HomePage}/>
-            <div className="App-header">
-                <h1>WOOK</h1>
-            </div>
+            <Route exact path='/' component={HomePage}/>
+            <Route path='/category/' component={CategorySection}/>
+
+            //PLACE FOR ALL ROUTES
+
+
+            //PLACE FOR THE FOOTER SECTION
         </div>
     );
 }
