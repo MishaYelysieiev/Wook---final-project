@@ -27,23 +27,83 @@ db.once('open', () => console.log('connected to the database'));
 // checks if connection with the database is successful
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-// Get one of our category
+// Category CRUD
+router.post('/category/', function(req, res) {
+    let category = new Category({
+        name: req.body.name,
+    });
+
+    category.save(function (err) {
+        if (!err) {
+            return res.send({ status: 'OK', category:category });
+        } else {
+            console.log(err);
+            if(err.name === 'ValidationError') {
+                res.statusCode = 400;
+                res.send({ error: 'Validation error' });
+            } else {
+                res.statusCode = 500;
+                res.send({ error: 'Server error' });
+            }
+        }
+    });
+});
+
 router.get('/category/:id', function(req, res) {
     return Category.findById(req.params.id, function (err, category) {
         if(!category) {
             res.statusCode = 404;
-            return res.send({ success: false, error: 'Not found' });
+            return res.send({ error: 'Not found' });
         }
         if (!err) {
             return res.send({ status: 'OK', category:category });
         } else {
             res.statusCode = 500;
-            // log.error('Internal error(%d): %s',res.statusCode,err.message);
             return res.send({ error: 'Server error' });
         }
     });
 });
 
+router.put('/category/:id', function (req, res){
+    return Category.findById(req.params.id, function (err, category) {
+        if(!category) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+
+        category.name = req.body.name;
+        return category.save(function (err) {
+            if (!err) {
+                return res.send({ status: 'OK', category:category });
+            } else {
+                if(err.name === 'ValidationError') {
+                    res.statusCode = 400;
+                    res.send({ error: 'Validation error' });
+                } else {
+                    res.statusCode = 500;
+                    res.send({ error: 'Server error' });
+                }
+            }
+        });
+    });
+});
+
+router.delete('/category/:id', function (req, res){
+    return Category.findById(req.params.id, function (err, category) {
+        if(!category) {
+            res.statusCode = 404;
+            return res.send({ error: 'Not found' });
+        }
+        return category.remove(function (err) {
+            if (!err) {
+                return res.send({ status: 'OK' });
+            } else {
+                res.statusCode = 500;
+                return res.send({ error: 'Server error' });
+            }
+        });
+    });
+});
 
 
 

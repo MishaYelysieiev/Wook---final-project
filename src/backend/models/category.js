@@ -6,7 +6,7 @@ const Category = new Schema(
     {
         id: Number,
         name: String,
-        products: [{type: Schema.ObjectId, ref: 'Products'}]
+        // books: [{type: Schema.ObjectId, ref: 'Books'}]
     }
 );
 
