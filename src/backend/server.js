@@ -1,115 +1,40 @@
-const mongoose = require('mongoose');
+// get dependencies
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const Category = require('./models/category');
 
-const API_PORT = 3000;
 const app = express();
-app.use(cors());
-const router = express.Router();
 
-// this is our MongoDB database
-const dbRoute= require('./config');
 
-// bodyParser, parses the request body to be a readable json format
-app.use(bodyParser.urlencoded({ extended: false }));
+// parse requests
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+//Enable CORS for all HTTP methods
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+// Configuring the database
+const config = require('./config.js');
+const mongoose = require('mongoose');
+require('./category/routes')(app);  //Add route file here
+
+mongoose.Promise = global.Promise;
 
 // connects our back end code with the database
-mongoose.connect(dbRoute, { useNewUrlParser: true });
-
-let db = mongoose.connection;
-
-db.once('open', () => console.log('connected to the database'));
-
-// checks if connection with the database is successful
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// Category CRUD
-router.post('/category/', function(req, res) {
-    let category = new Category({
-        name: req.body.name,
-    });
-
-    category.save(function (err) {
-        if (!err) {
-            return res.send({ status: 'OK', category:category });
-        } else {
-            console.log(err);
-            if(err.name === 'ValidationError') {
-                res.statusCode = 400;
-                res.send({ error: 'Validation error' });
-            } else {
-                res.statusCode = 500;
-                res.send({ error: 'Server error' });
-            }
-        }
-    });
+// Connecting to the database
+mongoose.connect(config.url, {
+    useNewUrlParser: true
+}).then(() => {
+    console.log("Successfully connected to the database");
+}).catch(err => {
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
 });
 
-router.get('/category/:id', function(req, res) {
-    return Category.findById(req.params.id, function (err, category) {
-        if(!category) {
-            res.statusCode = 404;
-            return res.send({ error: 'Not found' });
-        }
-        if (!err) {
-            return res.send({ status: 'OK', category:category });
-        } else {
-            res.statusCode = 500;
-            return res.send({ error: 'Server error' });
-        }
-    });
-});
-
-router.put('/category/:id', function (req, res){
-    return Category.findById(req.params.id, function (err, category) {
-        if(!category) {
-            res.statusCode = 404;
-            return res.send({ error: 'Not found' });
-        }
-
-        category.name = req.body.name;
-        return category.save(function (err) {
-            if (!err) {
-                return res.send({ status: 'OK', category:category });
-            } else {
-                if(err.name === 'ValidationError') {
-                    res.statusCode = 400;
-                    res.send({ error: 'Validation error' });
-                } else {
-                    res.statusCode = 500;
-                    res.send({ error: 'Server error' });
-                }
-            }
-        });
-    });
-});
-
-router.delete('/category/:id', function (req, res){
-    return Category.findById(req.params.id, function (err, category) {
-        if(!category) {
-            res.statusCode = 404;
-            return res.send({ error: 'Not found' });
-        }
-        return category.remove(function (err) {
-            if (!err) {
-                return res.send({ status: 'OK' });
-            } else {
-                res.statusCode = 500;
-                return res.send({ error: 'Server error' });
-            }
-        });
-    });
-});
-
-
-
-
-// append /api for our http requests
-app.use('/api', router);
 
 // launch our backend into a port
-app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));
+app.listen(config.serverport, () => console.log(`LISTENING ON PORT ${config.serverport}`));
