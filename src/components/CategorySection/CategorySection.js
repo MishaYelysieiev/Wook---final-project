@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ProductCard from "../ProductCard/ProductCard";
 
 import './CategorySection.scss';
@@ -10,12 +11,12 @@ class CategorySection extends React.Component {
 
     render() {
         return (
+
             <div className="CategorySection">
 
 
                 <ProductCard title='A Smarter Way to Learn
 JavaScript' author='Mark Myers' price='10,25'  stoke={false} src={src}/>
-
 
 
             </div>
