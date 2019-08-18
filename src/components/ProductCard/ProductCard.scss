@@ -1,0 +1,111 @@
+.ProductCard {
+  width: 288px;
+  border: 1px solid transparent;
+  box-sizing: border-box;
+  border-radius: 10px;
+  transition: 0.4s;
+  background-color: white;
+
+  &:hover{
+    border-color: #C4C4C4;
+    & .ProductCard_buttons{
+      opacity: 1;
+    }
+  }
+
+  &_wrapper {
+    height: 336px;
+    position: relative;
+  }
+
+  &_buttons{
+    position: absolute;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    height: 100%;
+    top: 0;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    opacity: 0;
+
+
+    & p{
+      font-size: 16px;
+      color: white;
+      margin-bottom: 22px;
+    }
+
+    & .book-btn{
+      border-radius: 5px;
+      padding: 8px 0;
+      min-width: 115px;
+      width: auto;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 16px;
+      line-height: 22px;
+      transition: 0.4s;
+
+    }
+
+    & .buy-btn{
+      color: #134442;
+      background: #A8F9FF;
+
+      &:hover{
+        background-color: white;
+      }
+    }
+
+    & .show-more-btn{
+      border: 1px solid #A8F9FF;
+      box-sizing: border-box;
+      color: white;
+      background: rgba(168, 249, 255, 0.3);
+
+      &:hover{
+        background: rgba(255, 255, 255, 0.3);
+        border-color: white;
+      }
+    }
+  }
+
+  & img {
+    width: 241px;
+  }
+
+  &_footer{
+    padding: 15px 6px 24px 6px;
+  }
+
+  & .book-{
+
+    &title{
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 22px;
+      color: #331B22;
+      margin-bottom: 4px;
+    }
+
+    &author{
+      font-size: 14px;
+      line-height: 19px;
+      color: #331B22;
+      margin-bottom: 10px;
+    }
+
+    &price{
+      font-size: 18px;
+      line-height: 25px;
+      color: #134442;
+    }
+  }
+
+}
+
