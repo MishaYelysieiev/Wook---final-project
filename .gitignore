@@ -24,4 +24,4 @@ yarn-error.log*
 
 .idea
 
-src/serverSide/config.js
+src/backend/config.*

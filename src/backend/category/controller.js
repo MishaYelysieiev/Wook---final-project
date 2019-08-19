@@ -3,7 +3,6 @@ const Category = require('./model');
 
 //Create new Product
 exports.create =  async (req, res) => {
-    console.log(req);
     // Request validation
     if(!req.body) {
         return res.status(400).send({
