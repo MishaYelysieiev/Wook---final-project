@@ -1,18 +1,18 @@
 module.exports = (app) => {
     const category = require('./controller');
 
-    // Create a new Product
+    // Create a new category
     app.post('/category', category.create);
 
-    // Retrieve all Products
+    // Retrieve all category
     app.get('/category', category.findAll);
 
-    // Retrieve a single Product with productId
+    // Retrieve a single category with id
     app.get('/category/:id', category.findOne);
 
-    // Update a Note with productId
+    // Update a category with id
     app.put('/category/:id', category.update);
 
-    // Delete a Note with productId
+    // Delete a category with id
     app.delete('/category/:id', category.delete);
 };

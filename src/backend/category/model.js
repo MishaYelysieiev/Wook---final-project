@@ -6,7 +6,6 @@ const Category = new Schema(
     {
         id: Number,
         name: String,
-        // books: [{type: Schema.ObjectId, ref: 'Books'}]
     }
 );
 
