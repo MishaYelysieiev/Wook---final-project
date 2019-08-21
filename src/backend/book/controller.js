@@ -141,7 +141,7 @@ exports.delete = async (req, res) => {
 
 // Find array of books by search query
 exports.findBooksBySearch = (req, res) => {
-    const regExp = new RegExp(req.params.q, 'i');
+    const regExp = new RegExp(req.body.q, 'i');
     Book.find({
         // title: new RegExp(req.params.q, 'i')
         $or: [
