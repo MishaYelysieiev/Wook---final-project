@@ -1,0 +1,118 @@
+.Banner{
+  background-color: #9AE5E6;
+  height: 85vh;
+  position: relative;
+  top: 15vh;
+  display: flex;
+  overflow: hidden;
+
+  &_pagintaion{
+    height: 150px;
+    width: 3px;
+    background-color: #134442;
+    position: absolute;
+    top: 70%;
+    left: 25px;
+    box-sizing: border-box;
+    z-index: 2;
+
+
+    & .indicator{
+      width: 3px;
+      height: calc(100% / 3);
+      background-color: white;
+      position: relative;
+      top: 0;
+      animation-duration: 12s;
+      animation-name: slidein;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      animation-delay: 3s;
+
+    }
+  }
+
+  &_slider{
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    left: 0;
+    animation-duration: 12s;
+    animation-name: slider;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-delay: 3s;
+  }
+
+  &_image-wrapper{
+    display: flex;
+    flex: 1 0 100%;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    //background-attachment: fixed;
+
+  }
+
+  &_first{
+    background-image: url("./img/Banner1.png");
+  }
+
+  &_second{
+    background-image: url("./img/Banner2.png");
+  }
+
+  &_third{
+    background-image: url("./img/Banner3.png");
+  }
+}
+
+
+
+@keyframes slidein {
+  16% {
+    top:0;
+  }
+  33% {
+    top:0;
+  }
+  50% {
+    top: calc(100% / 3);
+  }
+  66% {
+    top: calc(100% / 3);
+  }
+  83% {
+    top: calc(calc(100% / 3) * 2);
+  }
+  100% {
+    top: calc(calc(100% / 3) * 2);
+  }
+
+}
+
+@keyframes slider {
+  16% {
+    left:0;
+  }
+  33% {
+    left:0;
+  }
+  50% {
+    left: -100%;
+  }
+  66% {
+    left: -100%;
+  }
+  83% {
+    left: -200%;
+  }
+  100% {
+    left: -200%;
+  }
+
+}
