@@ -54,6 +54,7 @@ exports.findAll = (req, res) => {
 // Find array of books with a necessary category
 exports.findByCategory = (req, res) => {
     Book.find()
+        .populate ('author')
         .populate('category')
         .then(books => {
             const resultBooks = books.filter(books => {
@@ -136,4 +137,40 @@ exports.delete = async (req, res) => {
             message: "Could not delete book with id " + req.params.id
         });
     });
+};
+
+// Find array of books by search query
+exports.findBooksBySearch = (req, res) => {
+    const regExp = new RegExp(req.body.q, 'i');
+    Book.find({
+        // title: new RegExp(req.params.q, 'i')
+        $or: [
+            {title: regExp},
+            {description: regExp}
+            ]
+    })
+        .populate('category')
+        .populate ('author')
+        .then(books => {
+            // const resultBooks = books.filter(books => {
+            //     return books.category.name.toLowerCase() === req.params.category.toLowerCase();
+            // });
+            if (!books) {
+                return res.status(404).send({
+                    message: "Book not found"
+                });
+            }
+            res.send(books);
+        })
+        .catch(err => {
+            if (err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "Book not found"
+                });
+            }
+            console.log(err);
+            return res.status(500).send({
+                message: "Wrong retrieving book"
+            });
+        });
 };
