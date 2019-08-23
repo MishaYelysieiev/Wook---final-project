@@ -1,29 +1,24 @@
-const Book = require('./model');
-const Author = require('../models/author');
+const Cart = require('./model');
 
-//Create new Product
+//Create new cart
 exports.create = async (req, res) => {
     // Request validation
 
     if (!req.body) {
         return res.status(400).send({
-            message: "Book content can not be empty"
+            message: "Cart can not be empty"
         });
     }
-    let author = await new Author({
-        name: req.body.author
-    });
-    await author.save();
-    let category = await new Book({
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        category: req.body.category,
-        author: author._id,
-        image: req.body.image
-    });
+    let booksId = await req.body.books.split(',');
 
-    await category.save()
+    let cart = await new Cart({
+        currency: req.body.currency,
+        cartTotal: req.body.cartTotal,
+        customerInfo: req.body.customerInfo,
+        books: booksId
+    })
+
+    await cart.save()
         .then(data => {
             res.send(data);
         }).catch(err => {
@@ -32,50 +27,47 @@ exports.create = async (req, res) => {
             });
         });
 };
-// Retrieve all books from the database.
-exports.findAll = (req, res) => {
-    Book.find()
-        .populate('author', 'name')
-        .populate('category', 'name')
-        .then(books => {
-            if (!books) {
+// Retrieve all carts from the database.
+exports.findAll = async (req, res) => {
+    await Cart.find()
+    // .populate('user')
+        .populate('book')
+        .then(cart => {
+            if (!cart) {
                 return res.status(404).send({
-                    message: "Book not found with category " + req.params.category
+                    message: "Any carts not found"
                 });
             }
-            res.send(books);
+            res.send(cart);
         }).catch(err => {
-        res.status(500).send({
-            message: err.message || "Something wrong while retrieving books."
+            res.status(500).send({
+                message: err.message || "Something wrong while retrieving carts."
+            });
         });
-    });
 };
 
-// Find array of books with a necessary category
-exports.findByCategory = (req, res) => {
-    Book.find()
-        .populate ('author')
-        .populate('category')
-        .then(books => {
-            const resultBooks = books.filter(books => {
-                return books.category.name.toLowerCase() === req.params.category.toLowerCase();
-            });
-            if (!books) {
+// Find array of cart by id
+exports.findById = async (req, res) => {
+    await Cart.findById(req.params.id)
+    // .populate('user')
+        .populate('book')
+        .then(cart => {
+            if (!cart) {
                 return res.status(404).send({
-                    message: "Book not found with category " + req.params.category
+                    message: "Cart not found with id " + req.params.id
                 });
             }
-            res.send(resultBooks);
+            res.send(cart);
         })
         .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: "Book not found with category " + req.params.category
+                    message: "Cart not found with id " + req.params.id
                 });
             }
             console.log(err);
             return res.status(500).send({
-                message: "Wrong retrieving book with category " + req.params.category
+                message: "Wrong retrieving cart with id " + req.params.id
             });
         });
 };
@@ -86,91 +78,54 @@ exports.update = async (req, res) => {
     // Validate Request
     if (!req.body) {
         return res.status(400).send({
-            message: "Book content can not be empty"
+            message: "Cart content can not be empty"
         });
     }
     // Find and update product with the request body
-    await Book.findByIdAndUpdate(req.params.id, {
-        title: req.body.title,
-        description: req.body.description,
-        price: req.body.price,
-        category: req.body.category,
-        author:  req.body.author,
-        image: req.body.image
+    let booksId = await req.body.books.split(',');
+    await Cart.findByIdAndUpdate(req.params.id, {
+        currency: req.body.currency,
+        cartTotal: req.body.cartTotal,
+        customerInfo: req.body.customerInfo,
+        books: booksId
     }, {new: true})
-        .then(book => {
-            if (!book) {
+        .then(cart => {
+            if (!cart) {
                 return res.status(404).send({
-                    message: "Book not found with id " + req.params.id
+                    message: "Cart not found with id " + req.params.id
                 });
             }
-            res.send(book);
+            res.send(cart);
         }).catch(err => {
-        if (err.kind === 'ObjectId') {
-            return res.status(404).send({
-                message: "Book not found with id " + req.params.id
-            });
-        }
-        return res.status(500).send({
-            message: "Something wrong when updating book with id " + req.params.id
-        });
-    });
-};
-
-// Delete a note with the specified noteId in the request
-exports.delete = async (req, res) => {
-    await Book.findByIdAndRemove(req.params.id)
-        .then(book => {
-            if (!book) {
-                return res.status(404).send({
-                    message: "Book not found with id " + req.params.id
-                });
-            }
-            res.send({message: "Book deleted successfully!"});
-        }).catch(err => {
-        if (err.kind === 'ObjectId' || err.name === 'NotFound') {
-            return res.status(404).send({
-                message: "Book not found with id " + req.params.id
-            });
-        }
-        return res.status(500).send({
-            message: "Could not delete book with id " + req.params.id
-        });
-    });
-};
-
-// Find array of books by search query
-exports.findBooksBySearch = (req, res) => {
-    const regExp = new RegExp(req.body.q, 'i');
-    Book.find({
-        // title: new RegExp(req.params.q, 'i')
-        $or: [
-            {title: regExp},
-            {description: regExp}
-            ]
-    })
-        .populate('category')
-        .populate ('author')
-        .then(books => {
-            // const resultBooks = books.filter(books => {
-            //     return books.category.name.toLowerCase() === req.params.category.toLowerCase();
-            // });
-            if (!books) {
-                return res.status(404).send({
-                    message: "Book not found"
-                });
-            }
-            res.send(books);
-        })
-        .catch(err => {
             if (err.kind === 'ObjectId') {
                 return res.status(404).send({
-                    message: "Book not found"
+                    message: "Cart not found with id " + req.params.id
                 });
             }
-            console.log(err);
             return res.status(500).send({
-                message: "Wrong retrieving book"
+                message: "Something wrong when updating cart with id " + req.params.id
+            });
+        });
+};
+
+// Delete a cart with the specified id in the request
+exports.delete = async (req, res) => {
+    await Cart.findByIdAndRemove(req.params.id)
+        .then(cart => {
+            if (!cart) {
+                return res.status(404).send({
+                    message: "Cart not found with id " + req.params.id
+                });
+            }
+            res.send({message: "Cart deleted successfully!"});
+        }).catch(err => {
+            if (err.kind === 'ObjectId' || err.name === 'NotFound') {
+                return res.status(404).send({
+                    message: "Cart not found with id " + req.params.id
+                });
+            }
+            return res.status(500).send({
+                message: "Could not delete cart with id " + req.params.id
             });
         });
 };
