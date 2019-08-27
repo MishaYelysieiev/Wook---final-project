@@ -9,25 +9,24 @@ class ProductCard extends React.Component {
         super(props);
     }
 
-
     render() {
+        const { productCard } = this.props;
+        const { style } = this.props;
         return (
-            <div className='ProductCard' id={this.props.id}>
+            <div className='ProductCard' id={productCard.id} style={style}>
                 <div className="ProductCard_wrapper">
-                    <img src={this.props.src} alt="book image"/>
+                    <img src={productCard.src} alt="book image"/>
                     <div className="ProductCard_buttons">
-                        <p>{this.props.stoke ? 'On stoke': 'Not available'}</p>
-                        <Link className='buy-btn book-btn' to={'/buy/'+this.props.id}>Buy now</Link>
-                        <Link className='show-more-btn book-btn' to={'/book/'+this.props.id}>Read more</Link>
+                        <p>{productCard.stoke ? 'On stoke': 'Not available'}</p>
+                        <Link className='buy-btn book-btn' to={'/buy/'+productCard.id}>Buy now</Link>
+                        <Link className='show-more-btn book-btn' to={'/book/'+productCard.id}>Read more</Link>
                     </div>
                 </div>
                 <div className="ProductCard_footer">
-                    <p className="book-title">{this.props.title}</p>
-                    <p className="book-author">{this.props.author}</p>
-                    <p className="book-price">{'$' + this.props.price}</p>
+                    <p className="book-title">{productCard.title}</p>
+                    <p className="book-author">{productCard.author}</p>
+                    <p className="book-price">{'$' + productCard.price}</p>
                 </div>
-
-
 
             </div>
         );
