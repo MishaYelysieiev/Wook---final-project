@@ -10,10 +10,23 @@ exports.create = async (req, res) => {
             message: "Book content can not be empty"
         });
     }
-    let author = await new Author({
-        name: req.body.author
-    });
-    await author.save();
+
+
+
+    let author = await Author.findOneAndUpdate(
+        {name: req.body.author}, // find a document with that filter
+        {name: req.body.author}, // document to insert when nothing was found
+        {upsert: true, new: true}) // options
+        .then(auth =>{
+               return auth
+        })
+        .catch(err => {
+            return res.status(500).send({
+                message: "Something wrong when creating author " + req.body.author
+            });
+        });
+    
+
     let book = await new Book({
         title: req.body.title,
         description: req.body.description,
