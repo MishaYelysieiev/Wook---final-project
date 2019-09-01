@@ -89,11 +89,11 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a note with the specified noteId in the request
+// Delete a category with the specified id in the request
 exports.delete = (req, res) => {
     Category.findByIdAndRemove(req.params.id)
-        .then(product => {
-            if(!product) {
+        .then(category => {
+            if(!category) {
                 return res.status(404).send({
                     message: "Category not found with id " + req.params.id
                 });

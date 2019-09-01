@@ -10,11 +10,24 @@ exports.create = async (req, res) => {
             message: "Book content can not be empty"
         });
     }
-    let author = await new Author({
-        name: req.body.author
-    });
-    await author.save();
-    let category = await new Book({
+
+
+
+    let author = await Author.findOneAndUpdate(
+        {name: req.body.author}, // find a document with that filter
+        {name: req.body.author}, // document to insert when nothing was found
+        {upsert: true, new: true}) // options
+        .then(auth =>{
+               return auth
+        })
+        .catch(err => {
+            return res.status(500).send({
+                message: "Something wrong when creating author " + req.body.author
+            });
+        });
+    
+
+    let book = await new Book({
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
@@ -23,7 +36,7 @@ exports.create = async (req, res) => {
         image: req.body.image
     });
 
-    await category.save()
+    await book.save()
         .then(data => {
             res.send(data);
         }).catch(err => {
@@ -117,7 +130,7 @@ exports.update = async (req, res) => {
     });
 };
 
-// Delete a note with the specified noteId in the request
+// Delete a book with the specified id in the request
 exports.delete = async (req, res) => {
     await Book.findByIdAndRemove(req.params.id)
         .then(book => {
