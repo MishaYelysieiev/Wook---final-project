@@ -7,6 +7,9 @@ module.exports = (app) => {
     // Retrieve all Book
     app.get('/book', books.findAll);
 
+    // Retrieve all Book
+    app.get('/book/all', books.findAll);
+
     // Retrieve all Book by search question
     app.post('/book_search', books.findBooksBySearch);
 

@@ -14,7 +14,7 @@ function App() {
         <div className="App">
             <Header/>
             <Route exact path='/' component={HomePage}/>
-            <Route path='/category/' component={CategorySection}/>
+            <Route path='/category/:category' component={CategorySection}/>
 
             //PLACE FOR ALL ROUTES
 
