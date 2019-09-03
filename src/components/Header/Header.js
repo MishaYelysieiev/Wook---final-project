@@ -89,9 +89,9 @@ class Header extends React.Component {
                     <li onClick={this.checkOpenedDropDowm} className='category_item'><Link to='/category/all'>All
                         books</Link></li>
                     <li onClick={this.checkOpenedDropDowm} className='category_item'><Link
-                        to='/category/html'>HTML/CSS</Link></li>
+                        to='/category/html/css'>HTML/CSS</Link></li>
                     <li onClick={this.checkOpenedDropDowm} className='category_item'><Link
-                        to='/category/js'>JavaScript</Link></li>
+                        to='/category/javascript'>JavaScript</Link></li>
                     <li onClick={this.checkOpenedDropDowm} className='category_item'><Link
                         to='/category/pyton'>Pyton</Link></li>
                     <li onClick={this.checkOpenedDropDowm} className='category_item'><Link to='/category/php'>PHP</Link>
