@@ -54,8 +54,3 @@ class SubscribeSection extends React.Component {
 
 export default SubscribeSection;
 
-
-//                    <form>
-//                        <input className="EmailSubscribe" type="email" name="emailaddress" placeholder="email@example.com "/>
-//                        <input className="BtnSubscribe" type="submit" value="Sign up" />
-//                    </form>
