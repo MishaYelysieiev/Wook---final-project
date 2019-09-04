@@ -14,7 +14,10 @@ module.exports = (app) => {
     app.post('/book_search', books.findBooksBySearch);
 
     // Retrieve a single Book with categoryName
-    app.get('/book/:category', books.findByCategory);
+    app.get('/book/category/:category', books.findByCategory);
+
+     // Retrieve a single Book with categoryName
+     app.get('/book/:id', books.findById);
 
     // Update a Book with bookId
     app.put('/book/:id', books.update);
