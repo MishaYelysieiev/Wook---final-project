@@ -187,3 +187,30 @@ exports.findBooksBySearch = (req, res) => {
             });
         });
 };
+
+// Find array of book by id
+exports.findById = async (req, res) => {
+    await Book.findById(req.params.id)
+        .populate ('author')
+        .populate('category')
+        .then(book => {
+            if (!book) {
+                return res.status(404).send({
+                    message: "book not found with id " + req.params.id
+                });
+            }
+            res.send(book);
+        })
+        .catch(err => {
+            if (err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "book not found with id " + req.params.id
+                });
+            }
+            console.log(err);
+            return res.status(500).send({
+                message: "Wrong retrieving book with id " + req.params.id
+            });
+        });
+};
+
