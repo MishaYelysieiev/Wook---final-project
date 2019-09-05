@@ -16,6 +16,9 @@ module.exports = (app) => {
     // Retrieve a single Book with categoryName
     app.get('/book/category/:category', books.findByCategory);
 
+    // Retrieve Books with filters
+    app.get('/book/filter/', books.findBooks);
+
      // Retrieve a single Book with categoryName
      app.get('/book/:id', books.findById);
 
