@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// Configuring the database
+const config = require('./config/config.js');
+const mongoose = require('mongoose');
 
 // parse requests
 app.use(bodyParser.urlencoded({extended: true}));
@@ -17,16 +20,13 @@ app.use(function (req, res, next) {
     next();
 });
 
-// Configuring the database
-const config = require('./config.js');
-const mongoose = require('mongoose');
-
 mongoose.Promise = global.Promise;
 
 //routes file here
 require('./category/routes')(app);
 require('./book/routes')(app);
 require('./cart/routes')(app);
+require('./user/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database

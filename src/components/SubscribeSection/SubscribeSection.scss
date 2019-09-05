@@ -1,0 +1,48 @@
+.Subscribe {
+    background-image: url("./img/ImageSubscribe.png");
+    background-position: bottom;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    top:15vh;
+    &_block {
+        padding-left: 120px;
+    } 
+    
+    &_name {
+        font-weight: 600;
+        font-size: 36px;
+        color: #775B59;
+        letter-spacing: 1px;
+    }
+    
+    &_text {
+        font-size: 24px;
+        font-weight: normal;
+        color: #134442;
+        margin-top: 30px;
+    }
+    
+}
+.BtnSubscribe {
+    width: 170px;
+    height: 60px;
+    background: #0096A1;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    font-size: 24px;
+    border: inherit;
+    cursor: pointer;
+}
+.EmailSubscribe {
+    width: 350px;
+    height: 30px;
+    margin-top: 50px;
+    font-size: 20px;
+}
