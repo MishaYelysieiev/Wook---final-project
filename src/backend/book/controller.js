@@ -33,7 +33,11 @@ exports.create = async (req, res) => {
         price: req.body.price,
         category: req.body.category,
         author: author._id,
-        image: req.body.image
+        image: {...req.body.image},
+        rating: req.body.rating,
+        stock: req.body.stock,
+        date: req.body.date,
+        details: {...req.body.details},
     });
 
     await book.save()
@@ -102,14 +106,31 @@ exports.update = async (req, res) => {
             message: "Book content can not be empty"
         });
     }
+
+    let author = await Author.findOneAndUpdate(
+        {name: req.body.author}, // find a document with that filter
+        {name: req.body.author}, // document to insert when nothing was found
+        {upsert: true, new: true}) // options
+        .then(auth =>{
+               return auth
+        })
+        .catch(err => {
+            return res.status(500).send({
+                message: "Something wrong when creating author " + req.body.author
+            });
+        });
     // Find and update product with the request body
     await Book.findByIdAndUpdate(req.params.id, {
         title: req.body.title,
         description: req.body.description,
         price: req.body.price,
         category: req.body.category,
-        author:  req.body.author,
-        image: req.body.image
+        author: author._id,
+        image: {...req.body.image},
+        rating: req.body.rating,
+        stock: req.body.stock,
+        date: req.body.date,
+        details: {...req.body.details},
     }, {new: true})
         .then(book => {
             if (!book) {
@@ -153,13 +174,24 @@ exports.delete = async (req, res) => {
 };
 
 // Find array of books by search query
-exports.findBooksBySearch = (req, res) => {
+exports.findBooksBySearch = async (req, res) => {
     const regExp = new RegExp(req.body.q, 'i');
-    Book.find({
-        // title: new RegExp(req.params.q, 'i')
+    let author = await Author.find( 
+        {name: regExp}, // find a document with that filter
+        '_id') 
+        .then(auth =>{
+               return auth
+        })
+        .catch(err => {
+            return res.status(500).send({
+                message: "Something wrong when finding author " + req.body.q
+            });
+        });
+        await Book.find({
         $or: [
             {title: regExp},
-            {description: regExp}
+            {description: regExp},
+            {author: { $in: author}}
             ]
     })
         .populate('category')
@@ -214,3 +246,39 @@ exports.findById = async (req, res) => {
         });
 };
 
+// Find array of books with a pagination, filters and sorting
+exports.findBooks = (req, res) => {
+    let categoryQuery = {};
+    if (req.query.category ) {
+        categoryQuery.category = req.query.category;
+    };
+    const skipping = parseInt(req.query.skip) || 0;
+    const limiting = parseInt(req.query.limit) || 20;
+    console.log(req.query)
+    Book.find(categoryQuery)
+        // .where('category').equals(category)
+        .sort(req.query.order)
+        .skip(skipping)
+        .limit(limiting)
+        .populate ('author')
+        .populate('category')
+        .then(books => {
+            if (!books) {
+                return res.status(404).send({
+                    message: "Book not found"
+                });
+            }
+            res.send(books);
+        })
+        .catch(err => {
+            if (err.kind === 'ObjectId') {
+                return res.status(404).send({
+                    message: "Book not found"
+                });
+            }
+            console.log(err);
+            return res.status(500).send({
+                message: "Wrong retrieving book"
+            });
+        });
+};
