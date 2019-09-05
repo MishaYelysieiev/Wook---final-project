@@ -13,8 +13,8 @@ const Book = new Schema(
            small:  {type: String, required: false },
            detailed:  {type: String, required: false }
         },
-        rating: { type: String, required: true, index: true },
-        stock: { type: Boolean, required: true },
+        rating: { type: Number, required: true, index: true, default: 0 },
+        stock: { type: Boolean, required: true, deafult: false },
         date: { type: String, required: true, default: Date.now, index: true },
         details: {
             product_code:  { type: String, required: false, uniqe: true },
