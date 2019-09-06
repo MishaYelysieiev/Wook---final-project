@@ -4,14 +4,25 @@ const Schema = mongoose.Schema;
 // this will be our data base's data structure
 const Book = new Schema(
     {
-        id: Number,
         title: { type: String, required: true },
         description: { type: String, required: false },
-        price: { type: Number, required: true },
+        price: { type: Number, required: true, index: true },
         category: { type: Schema.ObjectId, ref: "Category", required: true },
         author: { type: Schema.ObjectId, ref: 'Author', required: true },
-        // author: { type: String, required: false }, // before Author model creation
-        image: { type: String, required: true }
+        image: {
+           small:  {type: String, required: false },
+           detailed:  {type: String, required: false }
+        },
+        rating: { type: Number, required: true, index: true, default: 0 },
+        stock: { type: Boolean, required: true, deafult: false },
+        date: { type: String, required: true, default: Date.now, index: true },
+        details: {
+            product_code:  { type: String, required: false, uniqe: true },
+            pages:  { type: Number, required: false },
+            size:  { type: String, required: false },
+            language:  { type: String, required: false },
+            public_date:  { type: String, required: false },
+        },
     }
 );
 

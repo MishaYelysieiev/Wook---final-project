@@ -1,0 +1,37 @@
+.MainCategorySection {
+  position: relative;
+  top: 15vh;
+  //margin-top: 59px;
+  //margin-bottom: 40px;
+  margin: 59px 77px 40px;
+
+
+  &_title {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 49px;
+    color: #775B59;
+    text-align: left;
+    margin-left: 73px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      background-color: #331B22;
+      top: 53px;
+      left: 0;
+      right: 0;
+    }
+  }
+
+
+
+  &_products {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 39px 20px 54px;
+    flex-wrap: wrap;
+  }
+}
