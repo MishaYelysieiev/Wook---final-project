@@ -21,7 +21,7 @@ class HomePage extends React.Component {
                 <Banner/>
                 <MainCategorySection title='New Books'/>
                 <MainCategorySection title='Most Popular Books'/>
-            <SubscribeSection/>
+                <SubscribeSection/>
 
             </main>
         );
