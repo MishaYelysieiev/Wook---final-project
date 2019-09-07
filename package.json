@@ -33,7 +33,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon --watch backend/* src/backend/server.js"
+    "server": "nodemon --watch backend/* src/backend/server.js",
     "dev": "nodemon server.js",
     "lint": "eslint src/**/*.js src/**/*.mjs"
   },
