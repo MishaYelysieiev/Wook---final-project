@@ -1,0 +1,94 @@
+.Footer {
+    background-color: #134442;
+    height: 250px;
+    width: 100%;
+    position: relative;
+    top: 15vh;
+    bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    &_wrapper {
+        display: flex;
+    }
+}
+.Footer_menu {
+    text-align: left;
+    margin-right: 110px;
+    &_list {
+        font-size: 18px;
+        color: #9AE5E6;
+        text-align: left;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+    &_item {
+        font-size: 14px;
+        color: #FFFFFF;
+        padding: 8px 0;
+    }
+    &_item:hover {
+        color: #9AE5E6;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    &_paypal {
+        background-image: url(img/Paypal.png);
+        background-repeat: no-repeat;
+        width: 100px;
+        height: 25px;
+    }
+    &_paypal:hover {
+        background-image: url(img/PayPalhover.png);
+        background-repeat: no-repeat;
+        width: 100px;
+        height: 25px;
+        cursor: pointer;
+    }
+    &_visa {
+        background-image: url(img/Visa.png);
+        background-repeat: no-repeat;
+        width: 80px;
+        height: 60px;
+    }
+    &_visa:hover {
+        background-image: url(img/Visahover.png);
+        background-repeat: no-repeat;
+        width: 80px;
+        height: 60px;
+        cursor: pointer;
+    }
+    &_mastercard {
+        background-image: url(img/Mastercard.png);
+        background-repeat: no-repeat;
+        width: 60px;
+        height: 40px;
+    }
+    &_mastercard:hover {
+        background-image: url(img/Mastercardhover.png);
+        background-repeat: no-repeat;
+        width: 60px;
+        height: 40px;
+        cursor: pointer;
+    }
+    &_social {
+        margin-top: 10px;
+    }
+    &_social::after {
+        content: '';
+        display: inline-block;
+        background-image: url(img/instaactive.png);
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+    }
+    &_social:hover:after {
+        content: '';
+        display: inline-block;
+        background-image: url(img/instagram.png);
+        width: 30px;
+        height: 30px; 
+        cursor: pointer;
+    }
+}
