@@ -24,12 +24,17 @@
     "stylelint-scss": "^3.9.3",
     "validator": "^11.1.0"
   },
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "lint": "eslint src/**/*.js src/**/*.mjs"
   },
   "eslintConfig": {
     "extends": "react-app"
