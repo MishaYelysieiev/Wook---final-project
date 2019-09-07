@@ -254,7 +254,7 @@ exports.findBooks = (req, res) => {
     };
     const skipping = parseInt(req.query.skip) || 0;
     const limiting = parseInt(req.query.limit) || 20;
-    console.log(req.query)
+    // console.log(req.query)
     Book.find(categoryQuery)
         // .where('category').equals(category)
         .sort(req.query.order)
