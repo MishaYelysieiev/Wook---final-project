@@ -17,7 +17,6 @@ class HomePage extends React.Component {
             <main className='HomePage'>
                 <Banner/>
             <SubscribeSection/>
-
             </main>
         );
     }
