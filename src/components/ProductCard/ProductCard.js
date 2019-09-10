@@ -14,7 +14,7 @@ class ProductCard extends React.Component {
         return (
             <div className='ProductCard' id={productCard._id}>
                 <div className="ProductCard_wrapper">
-                    <img src={productCard.src} alt="book image"/>
+                    <img src={productCard.image.small} alt="book image"/>
                     <div className="ProductCard_buttons">
                         <p>{productCard.stock ? 'On stock': 'Not available'}</p>
                         <Link className='buy-btn book-btn' to={'/buy/'+ productCard._id}>Buy now</Link>
