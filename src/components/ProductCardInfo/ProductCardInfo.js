@@ -46,7 +46,7 @@ class ProductCardInfo extends React.Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:3001/book/5d7121dcdad1035869f169e3').then((res)=>{
+        fetch('http://localhost:3001/book/5d74d669f420a51b64d3a621').then((res)=>{
             return res.json()
         }).then((data)=>{
             console.log(data);
