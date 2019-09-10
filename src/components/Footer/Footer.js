@@ -18,6 +18,7 @@ class Footer extends React.Component {
     render() {
         return (
             <div className = "Footer">
+
                   <div className = "Footer_logo">
                      <Logo/>
                   <p className = "Footer_logo_rights">© 2019 All rights reserved Wook</p>
