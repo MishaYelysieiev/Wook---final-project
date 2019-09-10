@@ -8,6 +8,9 @@ import HomePage from './components/HomePage/HomePage';
 import CategorySection from './components/CategorySection/CategorySection';
 import Footer from './components/Footer/Footer';
 
+import ProductCardInfo from './components/ProductCardInfo/ProductCardInfo';
+
+
 
 
 import './App.scss';
@@ -18,10 +21,8 @@ function App() {
             <Header/>
             <Route exact path='/' component={HomePage}/>
             <Route path='/category/:category' component={CategorySection}/>
-            
-        
-        
-        <Footer/>
+            <Route path='/book/' component={ProductCardInfo}/>
+            <Footer/>
         </div>
     );
 }
