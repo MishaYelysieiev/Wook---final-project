@@ -19,9 +19,11 @@ class HomePage extends React.Component {
         return (
             <main className='HomePage'>
                 <Banner/>
+
                 <MainCategorySection title='New Books' sortBy='-rating'/>
                 <MainCategorySection title='Most Popular Books' sortBy='-date'/>
                 <SubscribeSection/>
+
 
             </main>
         );
