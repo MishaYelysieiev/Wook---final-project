@@ -23,6 +23,7 @@ class HomePage extends React.Component {
                 <MainCategorySection title='Most Popular Books' sortBy='-date'/>
                 <SubscribeSection/>
 
+
             </main>
         );
     }
