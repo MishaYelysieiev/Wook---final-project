@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Configuring the database
-const config = require('./config/config.js');
+const config = require('./config/config.js') ||  process.env;
 const mongoose = require('mongoose');
 
 // parse requests
@@ -30,7 +30,7 @@ require('./user/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database
-mongoose.connect(config.url, {
+mongoose.connect(config.url || process.env.URL, {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");
@@ -40,4 +40,4 @@ mongoose.connect(config.url, {
 });
 
 // launch our backend into a port
-app.listen(config.serverport, () => console.log(`LISTENING ON PORT ${config.serverport}`));
+app.listen(config.serverport || process.env.SERVERPORT, () => console.log(`LISTENING ON PORT ${config.serverport || process.env.SERVERPORT}`));
