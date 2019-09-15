@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import HomePage from './components/HomePage/HomePage';
 import CategorySection from './components/CategorySection/CategorySection';
 import Footer from './components/Footer/Footer';
+
 import ProductCardInfo from './components/ProductCardInfo/ProductCardInfo';
 
 
@@ -22,7 +23,6 @@ function App() {
             <Route path='/category/:category' component={CategorySection}/>
             <Route path='/book/' component={ProductCardInfo}/>
             <Footer/>
-
         </div>
     );
 }

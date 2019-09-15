@@ -12,6 +12,17 @@
     &_wrapper {
         display: flex;
     }
+    &_logo {
+        height: 100%;
+        color: #838383;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding-left: 110px;
+    }
+
 }
 .Footer_menu {
     text-align: left;
