@@ -3,6 +3,8 @@ import React from 'react';
 
 import './MainCategorySection.scss'
 import ProductCard from "../ProductCard/ProductCard";
+import Button from "../Button/Button";
+import {Link} from "react-router-dom";
 
 class MainCategorySection extends React.Component {
 
@@ -45,6 +47,7 @@ class MainCategorySection extends React.Component {
                 <div className='MainCategorySection_products'>
                     {list}
                 </div>
+                <Link className="button" to="/category/all">All Books</Link>
 
 
             </div>
