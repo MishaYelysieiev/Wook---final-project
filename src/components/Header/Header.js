@@ -11,6 +11,28 @@ import accountIcon from '../Icons/Icon/accountIcon';
 
 import './Header.scss';
 
+document.addEventListener('click',function (e) {
+    const menu = document.querySelector('#dropDownMenu');
+    if(menu.classList.contains('opened')){
+        menu.classList.remove('opened');
+    }
+
+});
+
+document.addEventListener('keyup',function (e) {
+    const search = document.querySelector('#search');
+    const searchInput = document.querySelector('.search_input');
+    const searchIcon = document.querySelector('.search_icon');
+
+    if(e.key==='Enter' && searchInput.value){
+        window.location.replace(`/book_search/${searchInput.value.split(' ').join('&')}`);
+        searchInput.value = '';
+        search.classList.remove('opened');
+        searchIcon.classList.remove('opened');
+        searchInput.classList.remove('opened');
+    }
+});
+
 
 
 class Header extends React.Component {
@@ -20,7 +42,7 @@ class Header extends React.Component {
         menu.classList.toggle('opened');
     }
 
-    checkOpenedDropDowm() {
+    checkOpenedDropDown() {
         const menu = document.querySelector('#dropDownMenu');
         menu.classList.remove('opened');
     }
@@ -34,7 +56,7 @@ class Header extends React.Component {
 
         if (search.classList.contains('opened')) {
             if (searchInput.value) {
-                window.location.replace(`/search/${searchInput.value.split(' ').join('&')}`)
+                window.location.replace(`/book_search/${searchInput.value.split(' ').join('&')}`);
                 searchInput.value = '';
                 search.classList.remove('opened');
                 searchIcon.classList.remove('opened');
@@ -52,15 +74,30 @@ class Header extends React.Component {
         }
     }
 
+    checkCookieCart() {
+        let cart = document.querySelector('.cart_indicator');
+        if(document.cookie.split(';').filter(el=>el.split('_cart'))[0]){
+            let cookie = document.cookie.split(';').filter(el=>el.split('_cart').length)[0].split('=')[1];
+            let cookieArr = cookie.split(' ');
+            cart.innerText=`${cookieArr.length}`;
+            cart.style.display='block';
+
+        }
+    }
+
+    componentDidMount() {
+        this.checkCookieCart();
+    }
+
     render() {
         return (
             <div className='Header'>
                 <div className="Header_wrapper">
-                    <Logo click={this.checkOpenedDropDowm.bind(this)}/>
+                    <Logo click={this.checkOpenedDropDown.bind(this)}/>
                     <nav className="nav">
-                        <Link onClick={this.checkOpenedDropDowm} className='nav_link' to='/'>Home</Link>
+                        <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/'>Home</Link>
                         <Link className='nav_link' to='#' onClick={this.dropDownMenu}>Category</Link>
-                        <Link onClick={this.checkOpenedDropDowm} className='nav_link' to='/sale'>Sale</Link>
+                        <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/sale'>Sale</Link>
                     </nav>
                     <div className="contact">
                         <div className="contact_item">
@@ -77,24 +114,25 @@ class Header extends React.Component {
                             <input type="text" placeholder='Search' className='search_input'/>
                             <span onClick={this.openSearchBar} className='search_icon'>{searchIcon()}</span>
                         </div>
-                        <Link onClick={this.checkOpenedDropDowm} className='tools_link' to='/cart'>
+                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to={document.cookie.split(';').filter(el=>el.split('_cart'))[0] ?'/cart':'/'}>
                             {cartIcon()}
+                            <span className='cart_indicator'></span>
                         </Link>
-                        <Link onClick={this.checkOpenedDropDowm} className='tools_link' to='/account'>
+                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to='/account'>
                             {accountIcon()}
                         </Link>
                     </div>
                 </div>
                 <ul id='dropDownMenu' className='category'>
-                    <li onClick={this.checkOpenedDropDowm} className='category_item'><Link to='/category/all'>All
+                    <li onClick={this.checkOpenedDropDown} className='category_item'><Link to='/category/all'>All
                         books</Link></li>
-                    <li onClick={this.checkOpenedDropDowm} className='category_item'><Link
+                    <li onClick={this.checkOpenedDropDown} className='category_item'><Link
                         to='/category/html/css'>HTML/CSS</Link></li>
-                    <li onClick={this.checkOpenedDropDowm} className='category_item'><Link
+                    <li onClick={this.checkOpenedDropDown} className='category_item'><Link
                         to='/category/javascript'>JavaScript</Link></li>
-                    <li onClick={this.checkOpenedDropDowm} className='category_item'><Link
-                        to='/category/pyton'>Pyton</Link></li>
-                    <li onClick={this.checkOpenedDropDowm} className='category_item'><Link to='/category/php'>PHP</Link>
+                    <li onClick={this.checkOpenedDropDown} className='category_item'><Link
+                        to='/category/pyton'>Python</Link></li>
+                    <li onClick={this.checkOpenedDropDown} className='category_item'><Link to='/category/php'>PHP</Link>
                     </li>
                 </ul>
             </div>
