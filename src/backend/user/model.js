@@ -23,6 +23,32 @@ const User = new Schema({
     required: true,
     minlength: 5,
     maxlength: 1024
+  },
+  address: {
+    country: {
+      type: String,
+      required: false,
+      minlength: 2,
+      maxlength: 1024
+    },
+    city:{
+      type: String,
+      required: false,
+      minlength: 2,
+      maxlength: 1024
+    },
+    street:{
+      type: String,
+      required: false,
+      minlength: 5,
+      maxlength: 1024
+    }
+  },
+  phone: {
+    type: String,
+    required: false,
+    minlength: 5,
+    maxlength: 1024
   }
 });
 

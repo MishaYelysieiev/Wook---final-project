@@ -27,15 +27,23 @@ exports.register = async (req, res) => {
       return res.status(400).json(errors);
     }  
     // Grab user information
-    const { name, email, password } = req.body;
-    const userInfo = { name, email, password };
+    const { name, email, password, phone, address } = req.body;
+    const userInfo = { name, email, password, phone, address };
     // Crypt the password
     const salt = await bcrypt.genSalt(10);
     userInfo.password = await bcrypt.hash(password, salt);
     // Create the user
     const newUser = await User.create(userInfo);
     //errors = {};
-    res.status(200).send(newUser);
+
+     // Generate token
+  const { id, name: userName, email: userEmail } = newUser;
+  // In jwt.sign set the data that you want to get
+  const token = await jwt.sign({ id, userName, userEmail }, jwtSecret, { expiresIn: 3600 });
+  const bearerToken = `Bearer ${token}`; 
+  res.json({ token: bearerToken });
+
+    // res.status(200).send(newUser);
   } catch (err) {
     res.status(400).send(err);
   }
