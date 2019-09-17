@@ -3,7 +3,14 @@ const { Schema } = mongoose;
 
 
 const User = new Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 3,
+    maxlength: 30
+  },
+  lastName: {
     type: String,
     required: true,
     trim: true,
@@ -21,6 +28,32 @@ const User = new Schema({
   password: {
     type: String,
     required: true,
+    minlength: 5,
+    maxlength: 1024
+  },
+  address: {
+    country: {
+      type: String,
+      required: false,
+      minlength: 2,
+      maxlength: 1024
+    },
+    city:{
+      type: String,
+      required: false,
+      minlength: 2,
+      maxlength: 1024
+    },
+    street:{
+      type: String,
+      required: false,
+      minlength: 5,
+      maxlength: 1024
+    }
+  },
+  phone: {
+    type: String,
+    required: false,
     minlength: 5,
     maxlength: 1024
   }

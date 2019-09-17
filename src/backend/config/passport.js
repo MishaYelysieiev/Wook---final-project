@@ -3,7 +3,7 @@ const JwtStrategy = require('passport-jwt').Strategy,
 // eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose');
 
-const User = require('../User/model');
+const User = require('../user/model');
 const { jwtSecret } = require('../config/config.js') || process.env.jwtSecret;
 
 const opts = {};

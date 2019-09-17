@@ -13,4 +13,7 @@ module.exports = (app) => {
     // Return current user
     app.get('/current', passport.authenticate('jwt', {session: false}), user.current);
 
+    // Update the user
+    app.put('/user', passport.authenticate('jwt', {session: false}), user.update);
+
 };
