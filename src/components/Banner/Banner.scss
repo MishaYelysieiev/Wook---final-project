@@ -116,3 +116,43 @@
   }
 
 }
+
+@keyframes slidadap {
+  16% {
+    left:0;
+  }
+  33% {
+    left:0;
+  }
+  50% {
+    left: calc(100% / 3);
+  }
+  66% {
+    left: calc(100% / 3);
+  }
+  83% {
+    left: calc(calc(100% / 3) * 2);
+  }
+  100% {
+    left: calc(calc(100% / 3) * 2);
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+    .Banner {
+        height: 150px;
+        top: 20vh;
+        &_pagintaion {
+            height: 2px;
+            width: 45px;
+            top: 95%;
+            left: 15px;
+            & .indicator {
+              width: 15px;
+              height: 2px;
+              animation-name: slidadap;
+             } 
+        }
+     }
+}

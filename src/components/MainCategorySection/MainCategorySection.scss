@@ -53,3 +53,30 @@
 .button:hover {
   box-shadow: 0 20px 9px -16px #9AE5E6;
 }
+
+
+@media screen and (max-width: 320px) {
+    .MainCategorySection {
+        top: 20vh;
+        margin: 0;
+        &_title {
+          font-size: 16px;
+            margin: 0;
+            text-align: center;
+          &::after {
+              height: 1px;
+              width: 74%;
+              margin: 0 auto;
+              }  
+           } 
+    }
+    .button {
+          position: relative;
+          width: 115px;
+          height: 20px;
+          font-size: 16px;
+          margin: 0 auto;
+          right: 0;
+      }
+    
+}
