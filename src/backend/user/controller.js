@@ -4,9 +4,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('./model');
-const {
-  jwtSecret
-} = require('../config/config.js');
+// const { jwtSecret } = require('../config/config.js') || process.env.jwtSecret; // for localhost - decooment
+const jwtSecret =  process.env.jwtSecret; // for localhost have to be comment
 // Load validators
 const registerValidation = require('../validation/registr');
 const loginValidation = require('../validation/login');
