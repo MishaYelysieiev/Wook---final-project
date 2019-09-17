@@ -9,6 +9,28 @@ class ProductCard extends React.Component {
         super(props);
     }
 
+    addToCart(){
+        let date = new Date();
+        date.setDate(date.getDate()+1);
+        let cart = document.querySelector('.cart_indicator');
+        const { productCard } = this.props;
+
+        if(document.cookie.split(';').filter(el=>el.split('_cart'))[0]){
+            let cookie = document.cookie.split(';').filter(el=>el.split('_cart').length)[0].split('=')[1];
+            let cookieArr = cookie.split(' ');
+            document.cookie=`_cart=${cookie + " " + productCard._id};expires=${date}`;
+            cart.innerText=`${cookieArr.length+1}`;
+            cart.style.display='block';
+
+        }else{
+            document.cookie=`_cart=${productCard._id};expires=${date}`;
+            cart.innerText='1';
+            cart.style.display='block';
+
+        }
+    }
+
+
     render() {
         const { productCard } = this.props;
         return (
@@ -16,8 +38,7 @@ class ProductCard extends React.Component {
                 <div className="ProductCard_wrapper">
                     <img src={productCard.image.small} alt="book image"/>
                     <div className="ProductCard_buttons">
-                        <p>{productCard.stock ? 'On stock': 'Not available'}</p>
-                        <Link className='buy-btn book-btn' to={'/buy/'+ productCard._id}>Buy now</Link>
+                        <button className='buy-btn book-btn' onClick={this.addToCart.bind(this)}>Buy now</button>
                         <Link className='show-more-btn book-btn' to={'/book/'+ productCard._id}>Read more</Link>
                     </div>
                 </div>
