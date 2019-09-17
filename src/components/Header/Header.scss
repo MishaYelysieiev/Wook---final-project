@@ -115,6 +115,7 @@
     margin: 0 22px;
     position: relative;
     z-index: 1;
+    position: relative;
   }
 }
 
@@ -167,3 +168,17 @@
   fill: #9AE5E6;
 }
 
+.cart_indicator{
+  position: absolute;
+  background-color: #0096A1;
+  color: white;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: bold;
+  top: -10px;
+  right: 0;
+  display: none;
+  line-height: 25px;
+}
