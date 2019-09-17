@@ -3,7 +3,14 @@ const { Schema } = mongoose;
 
 
 const User = new Schema({
-  name: {
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+    minlength: 3,
+    maxlength: 30
+  },
+  lastName: {
     type: String,
     required: true,
     trim: true,
