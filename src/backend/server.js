@@ -5,7 +5,8 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Configuring the database
-const config = require('./config/config.js') ||  process.env;
+// const config = require('./config/config.js') ||  process.env; // for localhost have to be decomment
+const config = process.env // for localhost have to be comment
 const mongoose = require('mongoose');
 
 // parse requests
@@ -16,7 +17,7 @@ app.use(bodyParser.json());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
     next();
 });
 
