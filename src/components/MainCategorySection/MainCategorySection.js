@@ -1,9 +1,7 @@
 import React from 'react';
 
-
-import './MainCategorySection.scss'
+import './MainCategorySection.scss';
 import ProductCard from "../ProductCard/ProductCard";
-import Button from "../Button/Button";
 import {Link} from "react-router-dom";
 
 class MainCategorySection extends React.Component {
@@ -14,16 +12,6 @@ class MainCategorySection extends React.Component {
             externalData: null
         };
     }
-
-    // fetchData(sortBy = "-rating") {
-    //     fetch(`http://localhost:3001/book/filter/?category=&order=${sortBy}&skip=0&limit=4`)
-    //         .then(response => response.json())
-    //         .then(data => this.setState({externalData: data}));
-    // }
-    //
-    // componentDidMount() {
-    //     this.fetchData();
-    // }
 
     componentDidMount() {
         fetch(`http://localhost:3001/book/filter/?category=&order=${this.props.sortBy}&skip=0&limit=4`)
