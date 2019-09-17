@@ -1,6 +1,6 @@
 .CategorySection {
   position: relative;
-  top: 150px;
+  top: 148px;
 
   &_title {
     margin: 0 auto;
@@ -18,7 +18,6 @@
       padding: 7px 17px;
       border: 1px solid #C4C4C4;
       border-radius: 5px;
-
       & .sort-header {
         display: inline-block;
         font-size: 20px;
@@ -38,14 +37,14 @@
     }
   }
   &_product-list {
-    margin: 0 auto;
+    margin: 0 auto 50px;
     max-width: 1200px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
   & .btn-view {
-    margin: 50px auto 85px;
+    margin: 0 auto 85px;
     width: 180px;
     height: 65px;
     background: #9AE5E6;
