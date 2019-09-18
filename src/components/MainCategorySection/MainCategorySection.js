@@ -14,6 +14,7 @@ class MainCategorySection extends React.Component {
     }
 
     componentDidMount() {
+
         fetch(`http://localhost:3001/book/filter/?category=&order=${this.props.sortBy}&skip=0&limit=4`)
         // fetch(`/book/filter/?category=&order=${this.props.sortBy}&skip=0&limit=4`)
                 .then(response => response.json())
