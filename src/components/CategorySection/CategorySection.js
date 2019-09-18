@@ -36,6 +36,7 @@ class CategorySection extends React.Component {
     fetchData(sortBy = this.state.sortBy, numberOfProductCards = this.state.numberOfProductCards) {
         let {category: categoryName} = this.props.match.params;
         fetch(`http://localhost:3001/book/filter/?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=0&limit=`)
+        // fetch(`/book/filter/?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=0&limit=`)
             .then(response => response.json())
             .then(data => this.setState({externalData: data, sortBy: sortBy, numberOfProductCards: numberOfProductCards}));
     }
