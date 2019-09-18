@@ -41,4 +41,4 @@ mongoose.connect(config.url || process.env.URL, {
 });
 
 // launch our backend into a port
-app.listen(config.serverport || process.env.SERVERPORT, () => console.log(`LISTENING ON PORT ${config.serverport || process.env.SERVERPORT}`));
+app.listen(config.serverport || process.env.PORT, () => console.log(`LISTENING ON PORT ${config.serverport || process.env.PORT}`));
