@@ -51,11 +51,9 @@
         background-color: #E9E5E5;
         background-image: none;
         height: 160px;
-        display: block;
 
         &_name {
             font-size: 16px;
-
         }
 
         &_block {
@@ -68,16 +66,18 @@
             padding-top: 15px;
         }
     }
+
     .EmailSubscribe {
         width: 200px;
         height: 20px;
         margin-top: 20px;
         font-size: 12px;
     }
+
     .BtnSubscribe {
         width: 80px;
         height: 35px;
         font-size: 16px;
     }
-    
+
 }
