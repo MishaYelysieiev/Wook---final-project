@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+// import {Link} from "react-router-dom";
 
 import './ProductCardInfo.scss';
 
@@ -22,7 +22,10 @@ class ProductCardInfo extends React.Component {
     componentDidMount() {
         let url = window.location.href.split('/');
         let id = url[url.length-1];
+      
         fetch(`http://localhost:3001/book/${id}`).then((res)=>{
+        // fetch(`/book/${id}`).then((res)=>{
+
             console.log(id);
             return res.json()
         }).then((data)=>{
