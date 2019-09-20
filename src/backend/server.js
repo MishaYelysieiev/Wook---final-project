@@ -13,7 +13,7 @@ const config = process.env // for localhost have to be comment
 const mongoose = require('mongoose');
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'build/')));
 
 // parse requests
 app.use(bodyParser.urlencoded({extended: true}));

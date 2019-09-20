@@ -42,8 +42,8 @@ class Cart extends React.Component {
         const that = this;
         await this.arr.forEach(async function (el) {
 
-            let book = await fetch(`http://localhost:3001/book/${el}`).then((res) => {
-            // let book = await fetch(`/book/${el}`).then((res) => {
+            // let book = await fetch(`http://localhost:3001/book/${el}`).then((res) => {
+            let book = await fetch(`/book/${el}`).then((res) => {
 
                 return res.json()
             }).then((data) => {
