@@ -1,1 +1,1 @@
-worker: node src/backend/server.js
+web: npm run start && npm run server
