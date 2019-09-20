@@ -4,8 +4,14 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('./model');
+
+require('dotenv').config()
+
+
 // const { jwtSecret } = require('../config/config.js') || process.env.jwtSecret; // for localhost - decooment
-const jwtSecret =  process.env.jwtSecret; // for localhost have to be comment
+
+ const jwtSecret =  process.env.jwtSecret; // for localhost have to be comment
+
 // Load validators
 const registerValidation = require('../validation/registr');
 const loginValidation = require('../validation/login');
@@ -79,6 +85,7 @@ exports.register = async (req, res) => {
 
     // res.status(200).send(newUser);
   } catch (err) {
+    console.log (err)
     res.status(400).send(err);
   }
 };
@@ -141,6 +148,7 @@ exports.login = async (req, res) => {
     });
 
   } catch (err) {
+    console.log (err)
     res.status(400).send(err);
   }
 
@@ -216,6 +224,7 @@ exports.update = async (req, res) => {
     });
   
   } catch (err) {
+    console.log (err)
     res.status(400).send(err);
   }
 
