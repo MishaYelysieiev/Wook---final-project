@@ -34,10 +34,10 @@ app.use(function (req, res, next) {
 mongoose.Promise = global.Promise;
 
 //routes file here
-require('./category/routes')(app);
-require('./book/routes')(app);
-require('./cart/routes')(app);
-require('./user/routes')(app);
+require('./src/backend/category/routes')(app);
+require('./src/backend/book/routes')(app);
+require('./src/backend/cart/routes')(app);
+require('./src/backend/user/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database
@@ -52,8 +52,8 @@ mongoose.connect(config.url || process.env.URL, {
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'build/index.html'));
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
 
 // launch our backend into a port

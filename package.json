@@ -2,6 +2,7 @@
   "name": "wook-final",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
@@ -37,7 +38,7 @@
     "eject": "react-scripts eject",
     "server": "nodemon --watch backend/* src/backend/server.js",
     "lint": "eslint src/**/*.js",
-    "heroku-postbuild": "cd src && npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
