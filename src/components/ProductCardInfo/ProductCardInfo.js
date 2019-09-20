@@ -24,7 +24,7 @@ class ProductCardInfo extends React.Component {
         let id = url[url.length-1];
       
         // fetch(`http://localhost:3001/book/${id}`).then((res)=>{
-        fetch(`/book/${id}`).then((res)=>{
+        fetch(`/api/book/${id}`).then((res)=>{
 
             console.log(id);
             return res.json()
