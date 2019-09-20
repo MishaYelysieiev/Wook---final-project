@@ -4,11 +4,11 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
+require('dotenv').config()
 
 // Configuring the database
 
 // const config = require('./config/config.js') ||  process.env; // for localhost have to be decomment
-const config = process.env // for localhost have to be comment
 
 const mongoose = require('mongoose');
 
@@ -42,7 +42,7 @@ require('./src/backend/order/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database
-mongoose.connect(config.url || process.env.URL, {
+mongoose.connect(process.env.URL, {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");
@@ -58,4 +58,4 @@ app.get('/*', function (req, res) {
   });
 
 // launch our backend into a port
-app.listen(config.serverport || process.env.PORT, () => console.log(`LISTENING ON PORT ${config.serverport || process.env.PORT}`));
+app.listen(process.env.PORT, () => console.log(`LISTENING ON PORT ${process.env.PORT}`));

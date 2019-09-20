@@ -26,3 +26,4 @@ yarn-error.log*
 
 # src/backend/config/
 src/backend/config/config.js
+.env
