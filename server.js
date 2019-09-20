@@ -34,18 +34,11 @@ app.use(function (req, res, next) {
 mongoose.Promise = global.Promise;
 
 //routes file here
-<<<<<<< HEAD:server.js
+
 require('./src/backend/category/routes')(app);
 require('./src/backend/book/routes')(app);
-require('./src/backend/cart/routes')(app);
 require('./src/backend/user/routes')(app);
-=======
-require('./category/routes')(app);
-require('./book/routes')(app);
-require('./user/routes')(app);
-require('./order/routes')(app);
-
->>>>>>> developer:src/backend/server.js
+require('./src/backend/order/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database

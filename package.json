@@ -36,7 +36,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon --watch backend/* src/backend/server.js",
+    "server": "nodemon --watch backend/* --watch server.js server.js",
     "lint": "eslint src/**/*.js",
     "heroku-postbuild": "npm run build"
   },
