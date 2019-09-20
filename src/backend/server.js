@@ -5,8 +5,10 @@ const bodyParser = require('body-parser');
 const app = express();
 
 // Configuring the database
+
 const config = require('./config/config.js') ||  process.env; // for localhost have to be decomment
 // const config = process.env // for localhost have to be comment
+
 const mongoose = require('mongoose');
 
 // parse requests
