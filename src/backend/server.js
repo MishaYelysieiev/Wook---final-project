@@ -28,8 +28,9 @@ mongoose.Promise = global.Promise;
 //routes file here
 require('./category/routes')(app);
 require('./book/routes')(app);
-require('./cart/routes')(app);
 require('./user/routes')(app);
+require('./order/routes')(app);
+
 
 // connects our back end code with the database
 // Connecting to the database
