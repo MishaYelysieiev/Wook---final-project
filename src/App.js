@@ -6,6 +6,7 @@ import {reducer as formReducer} from 'redux-form';
 import Header from './components/Header/Header';
 import HomePage from './components/HomePage/HomePage';
 import CategorySection from './components/CategorySection/CategorySection';
+import Cabinet from './components/Cabinet/Cabinet'
 import Footer from './components/Footer/Footer';
 import Cart from './components/Cart/Cart';
 
@@ -27,6 +28,7 @@ function App() {
             <Route path='/sale' component={CategorySection}/>
             <Route path='/book/' component={ProductCardInfo}/>
             <Route path='/cart' component={Cart}/>
+            <Route path='/cabinet/' component={Cabinet}/>
             <Footer/>
         </div>
 

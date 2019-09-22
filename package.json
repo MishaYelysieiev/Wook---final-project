@@ -2,17 +2,21 @@
   "name": "wook-final",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "dependencies": {
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.3.0-beta2",
     "mongoose": "^5.6.9",
     "node-sass": "^4.12.0",
+    "nodemon": "^1.19.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
@@ -33,9 +37,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "nodemon --watch backend/* src/backend/server.js",
-    "dev": "nodemon server.js",
-    "lint": "eslint src/**/*.js"
+    "server": "nodemon --watch backend/* --watch server.js server.js",
+    "lint": "eslint src/**/*.js",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -55,7 +59,6 @@
   "devDependencies": {
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
-    "stylelint-config-recommended": "^2.2.0",
-    "nodemon": "^1.19.1"
+    "stylelint-config-recommended": "^2.2.0"
   }
 }
