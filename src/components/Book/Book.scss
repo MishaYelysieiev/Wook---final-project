@@ -1,0 +1,31 @@
+.Book {
+  margin: 10px auto;
+  max-width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  text-align: left;
+  font-family: "Open Sans", sans-serif;
+  color: #331B22;
+  &_image {
+    display: block;
+    max-width: 125px;
+  }
+  &_data {
+    max-width: 400px;
+    font-size: 14px;
+    line-height: 19px;
+    & .data-author {
+      margin-top: 15px;
+      display: block;
+    }
+  }
+  &_price {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  &_quantity {
+    font-size: 16px;
+    line-height: 22px;
+  }
+}

@@ -118,7 +118,7 @@ class Header extends React.Component {
                             {cartIcon()}
                             <span className='cart_indicator'></span>
                         </Link>
-                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to='/account'>
+                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to='/cabinet/contact-information'>
                             {accountIcon()}
                         </Link>
                     </div>

@@ -1,0 +1,76 @@
+.AddressEditing {
+  position: relative;
+  top: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: right;
+  &_info {
+    display: flex;
+    justify-content: space-between;
+
+    text-align: left;
+    & .info-address {
+      //display: flex;
+      //flex-wrap: wrap;
+      &_item {
+        display: block;
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        line-height: 27px;
+        color: #775B59;
+      }
+    }
+    & .info-delivery {
+      //display: flex;
+      //flex-wrap: wrap;
+    }
+    & .info-contact {
+      //display: flex;
+      //flex-wrap: wrap;
+      padding-top: 50px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      color: #134442;
+    }
+    input {
+      display: block;
+      padding-left: 5px;
+      width: 300px;
+      height: 32px;
+      margin-bottom: 22px;
+      border: 1px solid #775B59;
+      box-sizing: border-box;
+      border-radius: 5px;
+      outline: none;
+      font-size: 14px;
+      line-height: 19px;
+      color: #134442;
+    }
+  }
+  & .info-header {
+    display: block;
+    font-family: "Open Sans", sans-serif;
+    font-size: 18px;
+    line-height: 25px;
+    color: #331B22;
+    margin-bottom: 25px;
+  }
+  & .btn-save-changes {
+    margin: 40px auto 73px;
+    width: 200px;
+    height: 46px;
+    background: #9AE5E6;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    color: #134442;
+  }
+}
