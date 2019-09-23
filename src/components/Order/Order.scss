@@ -1,0 +1,24 @@
+.Order {
+  margin-top: 30px;
+  &_item {
+    display: flex;
+    justify-content: space-between;
+    & .item-data {
+      font-size: 18px;
+      line-height: 25px;
+      color: #331B22;
+      & .item-data-number {
+        font-weight: bold;
+      }
+    }
+    & .item-state {
+      font-size: 16px;
+      line-height: 22px;
+      color: #3BA639;
+    }
+  }
+  &_delivery {
+    display: flex;
+    justify-content: space-between;
+  }
+}

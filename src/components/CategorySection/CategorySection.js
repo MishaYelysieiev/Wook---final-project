@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 import ProductCard from "../ProductCard/ProductCard";
 
@@ -8,15 +7,19 @@ import './CategorySection.scss';
 class CategorySection extends React.Component {
     constructor(props) {
         super(props);
+
+        this.initialNumberOfProductCards = 8;
+        this.addedNumberOfProductCards = 8;
+
         this.state = {
             sortBy: "-rating",
             externalData: null,
-            numberOfProductCards: 8
+            numberOfProductCards: this.initialNumberOfProductCards
         };
 
         this.categoryId = {
             javascript: "5d5582ab0de3f353d94ceaf6",
-            pyton: "5d555850155d165a250ce80f",
+            python: "5d555850155d165a250ce80f",
             php: "5d5582b00de3f353d94ceaf7",
             html: "5d738845a390a82b1cb4991a",
             all: ""
@@ -27,7 +30,7 @@ class CategorySection extends React.Component {
         switch(category) {
             case "html" : return "HTML/CSS";
             case "javascript" : return "JavaScript";
-            case "pyton" : return "Pyton";
+            case "python" : return "Python";
             case "php" : return "PHP";
             default : return "All";
         }
@@ -35,48 +38,29 @@ class CategorySection extends React.Component {
 
     fetchData(sortBy = this.state.sortBy, numberOfProductCards = this.state.numberOfProductCards) {
         let {category: categoryName} = this.props.match.params;
-        fetch(`http://localhost:3001/book/filter/?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=0&limit=`)
-        // fetch(`/book/filter/?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=0&limit=`)
+        fetch(`/api/book/filter?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=0&limit=${numberOfProductCards}`)
             .then(response => response.json())
             .then(data => this.setState({externalData: data, sortBy: sortBy, numberOfProductCards: numberOfProductCards}));
     }
 
     componentDidMount() {
-        document.addEventListener('click', (e) => this.handleClickOutside(e));
-        this.fetchData();
-    }
-    componentWillUnmount() {
-        document.removeEventListener('click', (e) => this.handleClickOutside(e));
+       this.fetchData();
     }
 
-    handleClickOutside = (e) => {
-        if(e.target.parentNode && e.target.parentNode.classList.contains('category_item')) {
-            this.fetchData(this.state.sortBy, 8);
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.category !== prevProps.match.params.category) {
+            this.fetchData(this.state.sortBy, this.initialNumberOfProductCards);
         }
-    };
+    }
 
     handleChange = (e) => {
         this.fetchData(e.target.value);
     };
 
     addMoreData = () => {
-        this.setState({numberOfProductCards: this.state.numberOfProductCards + 8});
+        let numberOfProductCards = this.state.numberOfProductCards + this.addedNumberOfProductCards;
+        this.fetchData(this.state.sortBy, numberOfProductCards);
     };
-
-    getData(list) {
-        const newList = [];
-        if(this.state.numberOfProductCards <= list.length) {
-            for (let i = 0; i < this.state.numberOfProductCards; i++) {
-                newList.push(list[i]);
-            }
-        }
-        else {
-            for (let i = 0; i < list.length; i++) {
-                newList.push(list[i]);
-            }
-        }
-        return newList;
-    }
 
     getProductCardList() {
         let externalDataList = this.state.externalData.slice();
@@ -86,12 +70,12 @@ class CategorySection extends React.Component {
     render() {
         const {category} = this.props.match.params;
         let list = [];
-        let productCardList = [];
+        //let productCardList = [];
         if (this.state.externalData) {
             list = this.getProductCardList();
-            productCardList = this.getData(list);
+            //productCardList = this.getData(list);
         }
-        const button = (list.length > productCardList.length) && <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button>
+        //const button = (list.length > productCardList.length) && <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button>
         return (
             <div className="CategorySection">
                 <h1 className="CategorySection_title">{CategorySection.getHeader(category)} Books</h1>
@@ -105,12 +89,13 @@ class CategorySection extends React.Component {
                             <option value="-price" className="select-item">price down</option>
                         </select>
                     </div>
-                    <span className="sort-results">{productCardList.length} of {list.length} results</span>
+                    {/*<span className="sort-results">{productCardList.length} of {list.length} results</span>*/}
                 </div>
                 <div className="CategorySection_product-list">
-                    {productCardList}
+                    {list}
                 </div>
-                {button}
+                {/*{button}*/}
+                <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button>
             </div>
         );
     }

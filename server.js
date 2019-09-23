@@ -1,13 +1,23 @@
 // get dependencies
 const express = require('express');
+const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
+require('dotenv').config()
 
 // Configuring the database
-const config = require('./config/config.js') ||  process.env; // for localhost have to be decomment
-// const config = process.env // for localhost have to be comment
+
+// const config = require('./config/config.js') ||  process.env; // for localhost have to be decomment
+
 const mongoose = require('mongoose');
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
 
 // parse requests
 app.use(bodyParser.urlencoded({extended: true}));
@@ -24,14 +34,15 @@ app.use(function (req, res, next) {
 mongoose.Promise = global.Promise;
 
 //routes file here
-require('./category/routes')(app);
-require('./book/routes')(app);
-require('./cart/routes')(app);
-require('./user/routes')(app);
+
+require('./src/backend/category/routes')(app);
+require('./src/backend/book/routes')(app);
+require('./src/backend/user/routes')(app);
+require('./src/backend/order/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database
-mongoose.connect(config.url || process.env.URL, {
+mongoose.connect(process.env.URL, {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");
@@ -40,5 +51,11 @@ mongoose.connect(config.url || process.env.URL, {
     process.exit();
 });
 
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
 // launch our backend into a port
-app.listen(config.serverport || process.env.PORT, () => console.log(`LISTENING ON PORT ${config.serverport || process.env.PORT}`));
+app.listen(process.env.PORT, () => console.log(`LISTENING ON PORT ${process.env.PORT}`));

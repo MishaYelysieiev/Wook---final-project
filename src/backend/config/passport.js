@@ -3,8 +3,14 @@ const JwtStrategy = require('passport-jwt').Strategy,
 // eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose');
 
+<<<<<<< HEAD
 const User = require('../User/model');
 const { jwtSecret } = require('../config/config.js');
+=======
+// const { jwtSecret } = require('../config/config.js') || process.env.jwtSecret; // for localhost - decooment
+const jwtSecret =  process.env.jwtSecret; // for localhost have to be comment
+const User = require('../user/model');
+>>>>>>> 079b07d1f2a83a4b00f3cea97fcd4b298669a8d1
 
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
