@@ -5,6 +5,16 @@
   padding: 55px 115px 115px 115px;
   justify-content: space-between;
 
+  &__empty{
+    position: relative;
+    top: 15vh;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 30px;
+  }
+
   &_wrapper{
     min-height: 100vh;
   }
