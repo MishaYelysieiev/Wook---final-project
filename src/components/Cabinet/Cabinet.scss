@@ -1,0 +1,28 @@
+.Cabinet {
+  position: relative;
+  top: 150px;
+  margin-bottom: 100px;
+  &_nav {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    & .nav-item {
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      font-size: 24px;
+      line-height: 33px;
+      color: #7E9F9E;
+      & .active {
+        border-bottom: 3px solid #9AE5E6;
+        color: #134442;
+      }
+    }
+    & .nav-item:last-child {
+      padding-left: 200px;
+      font-weight: normal;
+      color: #775B59;
+      text-decoration: underline;
+    }
+  }
+}
