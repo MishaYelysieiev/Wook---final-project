@@ -26,3 +26,36 @@
     }
   }
 }
+
+
+
+@media screen and (max-width: 320px) {
+    .Cabinet {
+        padding-bottom: 50px;
+
+        &_nav {
+            & .nav-item {
+                font-size: 20px;
+                margin: 0 auto;
+            }
+
+            .address {
+                position: absolute;
+                bottom: 0px;
+                border-bottom: 1px solid;
+                width: 90vw;
+                margin: 15px;
+            }
+            .history {
+                position: absolute;
+                bottom: 50px;
+                border-bottom: 1px solid;
+                width: 90vw;
+                margin: 15px;
+            }
+            .exit {
+                display: none;
+            }
+        }
+    }
+}

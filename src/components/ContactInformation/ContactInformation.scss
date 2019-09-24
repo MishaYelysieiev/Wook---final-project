@@ -67,3 +67,36 @@
     color: #134442;
   }
 }
+
+
+@media screen and (max-width: 320px) {
+    .ContactInformation {
+        text-align: center;
+        
+        &_info {
+            flex-direction: column;
+            
+            & .info-contact {
+                padding-top: 0;
+            }
+            
+            & .info-password {
+                margin-top: 50px;
+            }
+            
+            input {
+                margin: 10px;
+            }
+            
+            label {
+                margin: 10px;
+            }
+        }
+        
+        & .info-header {
+            text-align: center;
+        }
+    }
+
+    
+}

@@ -57,3 +57,33 @@
     color: #134442;
   }
 }
+
+@media screen and (max-width: 320px) { 
+    .CategorySection {
+        &_sort {
+            
+            & .sort-by {
+                margin: 0;
+                
+                & .sort-header {
+                   font-size: 14px; 
+                }
+                
+                & .sort-select{
+                   font-size: 14px; 
+                }
+            }
+            
+        }
+        
+        & .btn-view {
+            width: 115px;
+            height: 44px;
+            font-size: 16px;
+          }
+        &_title {
+            font-size: 16px;
+        }
+        
+    }
+}
