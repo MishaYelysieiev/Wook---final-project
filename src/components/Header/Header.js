@@ -130,7 +130,7 @@ class Header extends React.Component {
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link
                         to='/category/javascript'>JavaScript</Link></li>
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link
-                        to='/category/pyton'>Python</Link></li>
+                        to='/category/python'>Python</Link></li>
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link to='/category/php'>PHP</Link>
                     </li>
                 </ul>
