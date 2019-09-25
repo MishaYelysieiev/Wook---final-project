@@ -103,7 +103,7 @@
 }
 
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
     .ProductCardInfo {
         flex-direction: column;
         padding: 10px;
@@ -145,16 +145,22 @@
                 font-size: 12px;
                 line-height: 16px;
                 text-align: justify;
+                width: 80vw;
+                margin: 20px auto;
             }
+            
             & .details {
                 text-align: left;
                 margin-bottom: 50px;
+                width: 80vw;
+                margin: 20px auto;
+                
                 &_heading {
                     font-size: 14px;
                 }
                 &_info {
                     font-size: 12px;
-                    & p{
+                    & p {
                       min-width: 95px;
                      }
                 }

@@ -26,7 +26,6 @@ class Footer extends React.Component {
                     <ul className = "Footer_menu">
                       <li className = "Footer_menu_list">Information</li>
                       <li className = "Footer_menu_item"><Link to='/'>Home</Link></li>
-                      <li className = "Footer_menu_item"><Link to='/sale'>Sale</Link></li>
                       <li className = "Footer_menu_item">Returns and Refunds</li>
                       <li className = "Footer_menu_item">Terms and Conditions</li>
                     </ul>

@@ -106,14 +106,23 @@
 }
 
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
     .Logo {
         display: none;
     }
     .Footer {
         height: 200px;
+        
+        &_wrapper {
+            margin: 0 auto;
+            width: 80vw;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        
         &_logo {
             padding: 0;
+            
             &_rights {
                 position: absolute;
                 bottom: 10px;

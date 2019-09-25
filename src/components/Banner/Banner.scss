@@ -139,19 +139,8 @@
 
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
     .Banner {
-        height: 150px;
-        &_pagintaion {
-            height: 2px;
-            width: 45px;
-            top: 95%;
-            left: 15px;
-            & .indicator {
-              width: 15px;
-              height: 2px;
-              animation-name: slidadap;
-             } 
-        }
+        display: none;
      }
 }

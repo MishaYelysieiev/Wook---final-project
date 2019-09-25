@@ -111,9 +111,9 @@
 }
 
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
     .ProductCard {
-        width: 50%;
+        width: 40%;
         
         &_wrapper {
             height: auto;

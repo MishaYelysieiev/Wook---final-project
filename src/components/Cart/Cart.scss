@@ -218,7 +218,7 @@
 
 
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 768px) {
     .Cart {
         padding: 0;
         flex-direction: column;
@@ -240,9 +240,9 @@
         
         & .item {
             position: relative;
-            width: 100vw;
             padding: 10px;
-            margin: 20px 0;
+            margin: 0 auto;
+            width: 80vw;
             
             &_details {
                 line-height: 14px;
@@ -277,7 +277,7 @@
         }
 
         & .Delivery {
-            width: 90vw;
+            width: 60vw;
             margin: 0 auto;
             padding-bottom: 50px;
             
