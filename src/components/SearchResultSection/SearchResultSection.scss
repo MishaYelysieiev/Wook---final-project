@@ -1,0 +1,33 @@
+.SearchResultSection {
+  position: relative;
+  top: 148px;
+
+  &_title {    
+    margin: 0 auto;
+    padding-bottom: 5px;
+    max-width: 1210px;
+    font-size: 36px;
+    border-bottom: 1px solid #331B22;
+    color: #775B59;
+  }
+  &_product-list {
+    margin: 0 auto 50px;
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  & .btn-view {
+    margin: 0 auto 85px;
+    width: 180px;
+    height: 65px;
+    background: #9AE5E6;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: 600;
+    color: #134442;
+  }
+}
