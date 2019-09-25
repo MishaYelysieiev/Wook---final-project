@@ -16,7 +16,6 @@ document.addEventListener('click',function (e) {
     if(menu.classList.contains('opened')){
         menu.classList.remove('opened');
     }
-
 });
 
 document.addEventListener('keyup',function (e) {
@@ -97,7 +96,7 @@ class Header extends React.Component {
                     <nav className="nav">
                         <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/'>Home</Link>
                         <Link className='nav_link' to='#' onClick={this.dropDownMenu}>Category</Link>
-                        <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/sale'>Sale</Link>
+                        {/*<Link onClick={this.checkOpenedDropDown} className='nav_link' to='/sale'>Sale</Link>*/}
                     </nav>
                     <div className="contact">
                         <div className="contact_item">
@@ -114,7 +113,7 @@ class Header extends React.Component {
                             <input type="text" placeholder='Search' className='search_input'/>
                             <span onClick={this.openSearchBar} className='search_icon'>{searchIcon()}</span>
                         </div>
-                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to={document.cookie.split(';').filter(el=>el.split('_cart'))[0] ?'/cart':'/'}>
+                        <Link onClick={this.checkOpenedDropDown} className='tools_link cart_link' to='/cart'>
                             {cartIcon()}
                             <span className='cart_indicator'></span>
                         </Link>
@@ -131,7 +130,7 @@ class Header extends React.Component {
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link
                         to='/category/javascript'>JavaScript</Link></li>
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link
-                        to='/category/pyton'>Python</Link></li>
+                        to='/category/python'>Python</Link></li>
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link to='/category/php'>PHP</Link>
                     </li>
                 </ul>
