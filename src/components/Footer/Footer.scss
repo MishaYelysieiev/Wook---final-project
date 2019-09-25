@@ -1,9 +1,9 @@
 .Footer {
     background-color: #134442;
-    height: 250px;
-    width: 100%;
+    width: 100vw;
+    padding: 20px;
     position: relative;
-    top: 15vh;
+    top: 20vh;
     bottom: 0;
     display: flex;
     flex-direction: row;
@@ -111,7 +111,6 @@
         display: none;
     }
     .Footer {
-        height: 200px;
         
         &_wrapper {
             margin: 0 auto;
@@ -126,7 +125,7 @@
             &_rights {
                 position: absolute;
                 bottom: 10px;
-                left: 90px;
+                left: calc(50% - 150px/2);
                 font-size: 10px;
             }
         }
@@ -136,14 +135,17 @@
     }
     .Footer_menu {
         margin-right: 25px;
+        
         &_item {
             font-size: 12px;
             padding: 5px 0;
         }
+        
         &_list {
             margin-bottom: 10px;
             font-size: 16px;
         }
+        
         &_social {
             margin: 10px 0;
             text-align: right;
@@ -152,10 +154,12 @@
                     height: 18px;
                 }
         }
+        
         & .imgsize {
             width: 18px;
             height: 18px;
         }
+        
         &_social::after {
             background-image: url(img/instagramadap.png);
             width: 18px;

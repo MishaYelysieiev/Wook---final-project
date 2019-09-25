@@ -31,31 +31,22 @@
 
 @media screen and (max-width: 768px) {
     .Cabinet {
-        padding-bottom: 50px;
-
+        margin-bottom: 50px;
+        width: 80vw;
+        margin: 0 auto;
         &_nav {
+            flex-direction: column;
+            position: relative;
             & .nav-item {
                 font-size: 20px;
-                margin: 0 auto;
+                margin: 5px auto;
+            }
+            
+            & .exit {
+                position: absolute;
+                right: -5px;
             }
 
-            .address {
-                position: absolute;
-                bottom: 0px;
-                border-bottom: 1px solid;
-                width: 90vw;
-                margin: 15px;
-            }
-            .history {
-                position: absolute;
-                bottom: 50px;
-                border-bottom: 1px solid;
-                width: 90vw;
-                margin: 15px;
-            }
-            .exit {
-                display: none;
-            }
         }
     }
 }

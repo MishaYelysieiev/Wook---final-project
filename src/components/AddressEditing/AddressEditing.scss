@@ -7,8 +7,8 @@
   &_info {
     display: flex;
     justify-content: space-between;
-
     text-align: left;
+      
     & .info-address {
       //display: flex;
       //flex-wrap: wrap;
@@ -73,4 +73,29 @@
     font-weight: 600;
     color: #134442;
   }
+}
+
+@media screen and (max-width: 768px) {
+    .AddressEditing {
+        text-align: center;
+        
+        &_info {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            
+            & .info-contact {
+                padding-top: 0;
+            }
+            
+            & .info-delivery {
+                margin-top: 50px;
+            }
+        }
+        
+        & .info-header {
+            text-align: center;
+        }
+    }
+    
 }
