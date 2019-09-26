@@ -9,6 +9,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     &_wrapper {
         display: flex;
     }
@@ -107,10 +108,12 @@
 
 
 @media screen and (max-width: 768px) {
-    .Logo {
-        display: none;
-    }
+
     .Footer {
+
+        & .Logo {
+            display: none;
+        }
         
         &_wrapper {
             margin: 0 auto;
