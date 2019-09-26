@@ -67,3 +67,40 @@
     color: #134442;
   }
 }
+
+
+@media screen and (max-width: 768px) {
+    .ContactInformation {
+        text-align: center;
+        
+        &_info {
+            flex-direction: column;
+            
+            & .info-contact {
+                padding-top: 0;
+            }
+            
+            & .info-password {
+                margin-top: 50px;
+            }
+            
+            input {
+                margin: 10px auto;
+                text-align: center;
+                width: 70vw;
+            }
+            
+            label {
+                margin: 10px auto;
+                text-align: center;
+                width: 70vw;
+            }
+        }
+        
+        & .info-header {
+            text-align: center;
+        }
+    }
+
+    
+}

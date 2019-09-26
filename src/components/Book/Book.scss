@@ -29,3 +29,16 @@
     line-height: 22px;
   }
 }
+
+@media screen and (max-width: 768px) {
+    .Book {
+        font-size: 14px;
+        
+        &_data {
+            max-width: 300px;
+            font-size: 12px;
+        }
+
+        
+    }
+}

@@ -116,3 +116,31 @@
   }
 
 }
+
+@keyframes slidadap {
+  16% {
+    left:0;
+  }
+  33% {
+    left:0;
+  }
+  50% {
+    left: calc(100% / 3);
+  }
+  66% {
+    left: calc(100% / 3);
+  }
+  83% {
+    left: calc(calc(100% / 3) * 2);
+  }
+  100% {
+    left: calc(calc(100% / 3) * 2);
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+    .Banner {
+        display: none;
+     }
+}
