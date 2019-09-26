@@ -22,3 +22,23 @@
     justify-content: space-between;
   }
 }
+
+@media screen and (max-width: 768px) {
+    .Order {
+        
+        &_item {
+            
+            & .item-data {
+                font-size: 14px;
+            }
+            & .item-state {
+               font-size: 12px; 
+            }
+        }
+        &_delivery {
+            border-bottom: 1px solid #775B59;
+            font-size: 12px;
+            margin-bottom: 60px;
+        }
+    }
+}

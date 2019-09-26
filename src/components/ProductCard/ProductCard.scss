@@ -110,3 +110,33 @@
 
 }
 
+
+@media screen and (max-width: 768px) {
+    .ProductCard {
+        width: 40%;
+        
+        &_wrapper {
+            height: auto;
+        }
+        
+        &_wrapper img{
+            width: 109px;
+            height: 148px;
+            margin-top: 20px;
+        }
+        
+        & .book-{
+            &title {
+                font-size: 12px;
+            }
+            
+            &author {
+                font-size: 10px;
+            }
+            &price {
+                font-size: 12px;
+            }
+        }  
+    }
+
+}
