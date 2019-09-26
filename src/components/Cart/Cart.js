@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 
 import './Cart.scss';
 
+const emptyCart = require('./empty-cart.png');
+
 
 class Cart extends React.Component {
 
@@ -10,7 +12,8 @@ class Cart extends React.Component {
         super(props);
         this.state = {
             data: [],
-            user:{}
+            user: {},
+            address: {}
         }
 
     }
@@ -42,6 +45,7 @@ class Cart extends React.Component {
         if (!+total.innerHTML.split('$')[1]) {
             document.querySelector('.cart_indicator').style.display = 'none';
             document.cookie = `_cart=;max-age=0`;
+            window.location.replace('/cart');
 
         }
 
@@ -71,34 +75,37 @@ class Cart extends React.Component {
         let totalPriceContainer = cart.querySelector('.Cart_total span');
         let price = 0;
 
-        cart.querySelectorAll('.item').forEach((el)=>{
+        cart.querySelectorAll('.item').forEach((el) => {
             this.checkItemPrice(el);
             price += +el.querySelector('.item_price').innerHTML.split('$')[1];
         });
 
-        totalPriceContainer.innerHTML=`$${(price).toFixed(2)}`;
+        totalPriceContainer.innerHTML = `$${(price).toFixed(2)}`;
     }
 
     checkItemPrice(item) {
-        item.querySelector('.item_price').innerHTML=`$${(+item.querySelector('.item_counter').value * +item.dataset.price).toFixed(2)}`;
+        item.querySelector('.item_price').innerHTML = `$${(+item.querySelector('.item_counter').value * +item.dataset.price).toFixed(2)}`;
     }
 
-    changeAmount(e) {
+    changeAmount() {
         this.checkCartTotal();
         this.updateCookie();
+        if (!+document.querySelector('.Cart_total span').innerHTML) {
+            this.render();
+        }
     }
 
     updateCookie() {
         let items = document.querySelectorAll('.item');
         let books = [];
 
-        items.forEach((el)=>{
+        items.forEach((el) => {
             let num = el.querySelector('.item_counter').value;
-            if(num>1){
-                for(let i=0;i<num;i++){
+            if (num > 1) {
+                for (let i = 0; i < num; i++) {
                     books.push(el.id);
                 }
-            }else{
+            } else {
                 books.push(el.id);
             }
 
@@ -110,16 +117,65 @@ class Cart extends React.Component {
         document.cookie = `_cart=${books.join(' ')};expires=${date}`;
     }
 
+    checkEmptyCookie(name) {
+        if (document.cookie.includes(name)) {
+            return true
+        }
+        return false
+    }
+
+    async putOrderData(event) {
+        await event.preventDefault();
+        let arr = Array.from(document.querySelectorAll('.item_counter'));
+
+        let number = await `${arr.reduce((acc,el)=>acc+ +el.value,0)}`;
+        let total = await +document.querySelector('.Cart_total span').innerHTML.split('$')[1];
+        let books = [];
+        await Array.from(document.querySelectorAll('.item')).forEach((el)=>{
+            books.push({book_id:el.id,quantity:`${el.querySelector('.item_counter').value}`})
+        });
+
+
+        const  order = await {
+            number: number,
+            date: new Date().toDateString(),
+            currency: 'USD',
+            orderTotal: total,
+            user: this.state.user._id||null,
+            books: books,
+            delivery_address: {
+                country: this.state.address.country||document.querySelector('.info-address .country input').value,
+                city: this.state.address.city||document.querySelector('.info-address .city input').value,
+                street: this.state.address.street||document.querySelector('.info-address .address input').value
+            },
+        };
+
+        await fetch('/order',{
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        }).then(res=>res).catch(e=>'LOL');
+
+        document.cookie = `_cart=;max-age=0`;
+
+        window.location.replace('/');
+
+
+    }
+
 
     async componentDidMount() {
-        if (document.cookie.split('_cart').length > 1) {
-            this.arr = document.cookie.split(';').filter(el => el.split('_cart').length)[0].split('=')[1].split(' ');
+        if (document.cookie.includes('_cart')) {
+            this.arr = document.cookie.split(';').filter(el => el.includes('_cart'))[0].split('=')[1].split(' ');
+            console.log(this.arr);
             let data = [];
             const that = this;
             await this.arr.forEach(async function (el) {
 
-                // let book = await fetch(`http://localhost:3001/api/book/${el}`).then((res) => {
                 let book = await fetch(`/api/book/${el}`).then((res) => {
+                    // let book = await fetch(`/api/book/${el}`).then((res) => {
                     return res.json()
                 }).then((data) => {
                     return data
@@ -131,6 +187,19 @@ class Cart extends React.Component {
 
 
             });
+        }
+        if (this.checkEmptyCookie('_login')) {
+            const that = await this;
+            const token = await document.cookie.split(';').filter(el => el.includes('_login'))[0].split('=')[1].split(' ')[1];
+            fetch('/api/current', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + token
+                }
+            }).then(res => res.json()).then(data => that.setState({user: data, address: data.address}));
+
+
         }
 
     }
@@ -156,7 +225,8 @@ class Cart extends React.Component {
                                 <p className='item_title'>{el.title}</p>
                                 <p className='item_author'>{el.author.name}</p>
                             </div>
-                            <input onChange={this.changeAmount.bind(this)} className='item_counter' type="number" step='1' min='1'
+                            <input onChange={this.changeAmount.bind(this)} className='item_counter' type="number"
+                                   step='1' min='1'
                                    defaultValue={
                                        arr.reduce((acc, item) => {
                                            if (item._id == el._id) {
@@ -194,17 +264,25 @@ class Cart extends React.Component {
                         </div>
 
                         <div className="Delivery">
-                            <form action="">
+                            <form onSubmit={this.putOrderData.bind(this)}>
                                 <h3>Delivery & Payment</h3>
                                 <div className="info-main">
                                     <label><p>First Name <span>*</span></p><input type="text" name='firstname'
-                                                                                  placeholder='First Name'/></label>
+                                                                                  placeholder='First Name'
+                                                                                  defaultValue={this.state.user.firstName || ''}
+                                                                                  required={true}/></label>
                                     <label><p>Last Name <span>*</span></p><input type="text" name='lastname'
-                                                                                 placeholder='Last Name'/></label>
+                                                                                 placeholder='Last Name'
+                                                                                 defaultValue={this.state.user.lastName || ''}
+                                                                                 required={true}/></label>
                                     <label><p>Phone <span>*</span></p><input type="text" name='phone'
-                                                                             placeholder='+380 00 000 00 00'/></label>
+                                                                             placeholder='+380 00 000 00 00'
+                                                                             defaultValue={this.state.user.phone || ''}
+                                                                             required={true}/></label>
                                     <label><p>Email <span>*</span></p><input type="text" name='email'
-                                                                             placeholder='example@mail.com'/></label>
+                                                                             placeholder='example@mail.com'
+                                                                             defaultValue={this.state.user.email || ''}
+                                                                             required={true}/></label>
                                 </div>
                                 <h3>Delivery</h3>
                                 <div className="info-delivery">
@@ -215,10 +293,13 @@ class Cart extends React.Component {
                                     </div>
                                     <div className="info-address">
                                         <label className='country'>Country <input type="text"
-                                                                                  placeholder='Enter your country'/></label>
-                                        <label className='city'>City <input type="text" placeholder='Enter your city'/></label>
+                                                                                  placeholder='Enter your country'
+                                                                                  defaultValue={this.state.address.country || ''}/></label>
+                                        <label className='city'>City <input type="text" placeholder='Enter your city'
+                                                                            defaultValue={this.state.address.city || ''}/></label>
                                         <label className='address'>Address <input type="text"
-                                                                                  placeholder='Enter your address'/></label>
+                                                                                  placeholder='Enter your address'
+                                                                                  defaultValue={this.state.address.street || ''}/></label>
                                     </div>
                                 </div>
                                 <h3>Payment</h3>
@@ -239,6 +320,7 @@ class Cart extends React.Component {
         } else {
             component = <div className='Cart__empty'>
                 <h1>There are no products to show, please add something to the cart before!</h1>
+                <img src={emptyCart} alt="empty"/>
             </div>
         }
 
