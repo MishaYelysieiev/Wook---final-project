@@ -26,3 +26,27 @@
     }
   }
 }
+
+
+
+@media screen and (max-width: 768px) {
+    .Cabinet {
+        margin-bottom: 50px;
+        width: 80vw;
+        margin: 0 auto;
+        &_nav {
+            flex-direction: column;
+            position: relative;
+            & .nav-item {
+                font-size: 20px;
+                margin: 5px auto;
+            }
+            
+            & .exit {
+                position: absolute;
+                right: -5px;
+            }
+
+        }
+    }
+}

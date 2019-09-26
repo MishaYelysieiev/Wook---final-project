@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const jwtSecret =  process.env.jwtSecret; // for localhost have to be comment
 const User = require('../user/model');
 
+
 const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = jwtSecret;
