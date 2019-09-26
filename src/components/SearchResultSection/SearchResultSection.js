@@ -4,6 +4,8 @@ import ProductCard from "../ProductCard/ProductCard";
 
 import './SearchResultSection.scss';
 
+const emptyBook = require('./nothingFound.png');
+
 class SearchResultSection extends React.Component {
     constructor(props) {
         super(props);
@@ -65,7 +67,11 @@ class SearchResultSection extends React.Component {
             if (this.state.externalData.length === 0 ) {
                 return (
                     <div className="SearchResultSection">
-                        <h1 className="SearchResultSection_title">No books found  by "{search}" search</h1>
+                        <h1 className="SearchResultSection_title">We're  Sorry!</h1>
+                        <div className='SearchResultSection__empty'>
+                            <h1>We can't seem to find any products that match your search for "{search}"</h1>
+                            <img src={emptyBook} alt="nothing found"/>
+                        </div>
                         {/* <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button> */}
                     </div>
                 );
