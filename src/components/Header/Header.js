@@ -75,7 +75,7 @@ class Header extends React.Component {
 
     checkCookieCart() {
         let cart = document.querySelector('.cart_indicator');
-        if(document.cookie.split(';').filter(el=>el.split('_cart'))[0]){
+        if(document.cookie.includes('_cart')){
             let cookie = document.cookie.split(';').filter(el=>el.split('_cart').length)[0].split('=')[1];
             let cookieArr = cookie.split(' ');
             cart.innerText=`${cookieArr.length}`;
@@ -101,11 +101,11 @@ class Header extends React.Component {
                     <div className="contact">
                         <div className="contact_item">
                             <img src={envelope} alt="envelope"/>
-                            <p>bookshop@gmail.com</p>
+                            <a href='#'>bookshop@gmail.com</a>
                         </div>
                         <div className="contact_item">
                             <img src={phone} alt="phone call"/>
-                            <p>+5 (036) 447 37 38</p>
+                            <a href='#'>+5 (036) 447 37 38</a>
                         </div>
                     </div>
                     <div className="tools">

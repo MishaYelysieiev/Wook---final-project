@@ -47,8 +47,8 @@ class ProductCardInfo extends React.Component {
             date.setDate(date.getDate()+1);
             let cart = document.querySelector('.cart_indicator');
 
-            if(document.cookie.split(';').filter(el=>el.split('_cart'))[0]){
-                let cookie = document.cookie.split(';').filter(el=>el.split('_cart').length)[0].split('=')[1];
+            if(document.cookie.includes('_cart')){
+                let cookie = document.cookie.split(';').filter(el=>el.includes('_cart'))[0].split('=')[1];
                 let cookieArr = cookie.split(' ');
                 document.cookie=`_cart=${cookie + " " + data._id};expires=${date}`;
                 cart.innerText=`${cookieArr.length+1}`;
