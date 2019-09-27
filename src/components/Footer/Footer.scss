@@ -21,7 +21,12 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
-        padding-left: 110px;
+        padding-left: 90px;
+        
+        &_rights {
+            position: absolute;
+            bottom: 10px;
+        }
     }
 
 }
@@ -107,12 +112,25 @@
 }
 
 
+@media screen and (max-width: 1200px) {
+    .Footer {
+        
+        &_logo {
+            padding-left: 40px;
+        }
+    }
+    .Footer_menu {
+        margin-right: 60px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .Footer {
 
         & .Logo {
             display: none;
         }
+        
         &_wrapper {
             margin: 0 auto;
             width: 80vw;
