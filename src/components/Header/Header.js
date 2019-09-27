@@ -13,10 +13,17 @@ import './Header.scss';
 
 document.addEventListener('click',function (e) {
     const menu = document.querySelector('#dropDownMenu');
-    if(menu.classList.contains('opened')){
+    const search = document.querySelector('#search');
+    const searchInput = document.querySelector('.search_input');
+    const searchIcon = document.querySelector('.search_icon');
+    if(menu.classList.contains('opened') && !e.target.classList.contains('nav_category') && !e.target.classList.contains('nav_burger')){
         menu.classList.remove('opened');
+    } if(search.classList.contains('opened') && !e.target.classList.contains('search_input') && !e.target.classList.contains('search_icon') && e.target.id!=='search'){
+        searchInput.value = '';
+        search.classList.remove('opened');
+        searchIcon.classList.remove('opened');
+        searchInput.classList.remove('opened');
     }
-
 });
 
 document.addEventListener('keyup',function (e) {
@@ -37,14 +44,16 @@ document.addEventListener('keyup',function (e) {
 
 class Header extends React.Component {
 
-    dropDownMenu() {
+    dropDownMenu(e) {
         const menu = document.querySelector('#dropDownMenu');
         menu.classList.toggle('opened');
+
     }
 
     checkOpenedDropDown() {
         const menu = document.querySelector('#dropDownMenu');
         menu.classList.remove('opened');
+
     }
 
     openSearchBar() {
@@ -76,7 +85,7 @@ class Header extends React.Component {
 
     checkCookieCart() {
         let cart = document.querySelector('.cart_indicator');
-        if(document.cookie.split(';').filter(el=>el.split('_cart'))[0]){
+        if(document.cookie.includes('_cart')){
             let cookie = document.cookie.split(';').filter(el=>el.split('_cart').length)[0].split('=')[1];
             let cookieArr = cookie.split(' ');
             cart.innerText=`${cookieArr.length}`;
@@ -95,18 +104,18 @@ class Header extends React.Component {
                 <div className="Header_wrapper">
                     <Logo click={this.checkOpenedDropDown.bind(this)}/>
                     <nav className="nav">
-                        <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/'>Home</Link>
-                        <Link className='nav_link' to='#' onClick={this.dropDownMenu}>Category</Link>
-                        <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/sale'>Sale</Link>
+                        <Link onClick={this.checkOpenedDropDown} className='nav_link nav_home' to='/'>Home</Link>
+                        <Link className='nav_link nav_category' to='#' onClick={this.dropDownMenu}>Category</Link>
+                        <Link className='nav_link nav_burger' to='#' onClick={this.dropDownMenu}></Link>
                     </nav>
                     <div className="contact">
                         <div className="contact_item">
                             <img src={envelope} alt="envelope"/>
-                            <p>bookshop@gmail.com</p>
+                            <a href='#'>bookshop@gmail.com</a>
                         </div>
                         <div className="contact_item">
                             <img src={phone} alt="phone call"/>
-                            <p>+5 (036) 447 37 38</p>
+                            <a href='#'>+5 (036) 447 37 38</a>
                         </div>
                     </div>
                     <div className="tools">
@@ -114,7 +123,7 @@ class Header extends React.Component {
                             <input type="text" placeholder='Search' className='search_input'/>
                             <span onClick={this.openSearchBar} className='search_icon'>{searchIcon()}</span>
                         </div>
-                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to={document.cookie.split(';').filter(el=>el.split('_cart'))[0] ?'/cart':'/'}>
+                        <Link onClick={this.checkOpenedDropDown} className='tools_link cart_link' to='/cart'>
                             {cartIcon()}
                             <span className='cart_indicator'></span>
                         </Link>
@@ -131,7 +140,7 @@ class Header extends React.Component {
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link
                         to='/category/javascript'>JavaScript</Link></li>
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link
-                        to='/category/pyton'>Python</Link></li>
+                        to='/category/python'>Python</Link></li>
                     <li onClick={this.checkOpenedDropDown} className='category_item'><Link to='/category/php'>PHP</Link>
                     </li>
                 </ul>

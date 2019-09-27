@@ -1,14 +1,15 @@
 .Footer {
     background-color: #134442;
-    height: 250px;
-    width: 100%;
+    width: 100vw;
+    padding: 20px;
     position: relative;
-    top: 15vh;
+    top: 20vh;
     bottom: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     &_wrapper {
         display: flex;
     }
@@ -20,13 +21,18 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
-        padding-left: 110px;
+        padding-left: 90px;
+        
+        &_rights {
+            position: absolute;
+            bottom: 10px;
+        }
     }
 
 }
 .Footer_menu {
     text-align: left;
-    margin-right: 110px;
+    margin-right: 90px;
     &_list {
         font-size: 18px;
         color: #9AE5E6;
@@ -90,6 +96,7 @@
         content: '';
         display: inline-block;
         background-image: url(img/instaactive.png);
+        background-repeat: no-repeat;
         width: 30px;
         height: 30px;
         margin-left: 20px;
@@ -102,4 +109,82 @@
         height: 30px; 
         cursor: pointer;
     }
+}
+
+
+@media screen and (max-width: 1200px) {
+    .Footer {
+        
+        &_logo {
+            padding-left: 40px;
+        }
+    }
+    .Footer_menu {
+        margin-right: 60px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Footer {
+
+        & .Logo {
+            display: none;
+        }
+        &_wrapper {
+            margin: 0 auto;
+            width: 80vw;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+        
+        &_logo {
+            padding: 0;
+            
+            &_rights {
+                position: absolute;
+                bottom: 10px;
+                left: calc(50% - 150px/2);
+                font-size: 10px;
+            }
+        }
+    }
+    .disnone {
+        display: none;
+    }
+    
+    .Footer_menu {
+        margin-right: 25px;
+        
+        &_item {
+            font-size: 12px;
+            padding: 5px 0;
+        }
+        
+        &_list {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        &_social {
+            margin: 10px 0;
+            text-align: right;
+                & .imgsize {
+                    width: 18px;
+                    height: 18px;
+                }
+        }
+        
+        & .imgsize {
+            width: 18px;
+            height: 18px;
+        }
+        
+        &_social::after {
+            background-image: url(img/instagramadap.png);
+            width: 18px;
+            height: 18px;
+            margin-left: 10px;
+        }
+    }
+    
 }

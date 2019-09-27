@@ -18,21 +18,18 @@ class Footer extends React.Component {
     render() {
         return (
             <div className = "Footer">
-
                   <div className = "Footer_logo">
                      <Logo/>
-                  <p className = "Footer_logo_rights">© 2019 All rights reserved Wook</p>
+                     <p className = "Footer_logo_rights">© 2019 All rights reserved Wook</p>
                  </div>
-
                  <div className = "Footer_wrapper">
                     <ul className = "Footer_menu">
                       <li className = "Footer_menu_list">Information</li>
                       <li className = "Footer_menu_item"><Link to='/'>Home</Link></li>
-                      <li className = "Footer_menu_item"><Link to='/sale'>Sale</Link></li>
                       <li className = "Footer_menu_item">Returns and Refunds</li>
                       <li className = "Footer_menu_item">Terms and Conditions</li>
                     </ul>
-                    <ul className = "Footer_menu">
+                    <ul className = "Footer_menu disnone">
                       <li className ="Footer_menu_list">Category</li>
                       <li className = "Footer_menu_item"> <Link to='/category/html/css'>HTML / CSS</Link> </li>
                       <li className = "Footer_menu_item"> <Link to='/category/javascript'>Java Script</Link> </li>
@@ -41,13 +38,13 @@ class Footer extends React.Component {
                       <li className = "Footer_menu_item"> <Link to='/category/all'>All books</Link></li>
                     </ul>
                     <ul className = "Footer_menu">
-                      <li><img src={envelope} alt="envelope"/><p className = "Footer_menu_item">bookshop@gmail.com</p></li>
-                      <li className = "social"><img src={phone} alt="phone call"/><p className = "Footer_menu_item">+5 (036) 447 37 38</p></li>
+                      <li><img className = "imgsize" src={envelope} alt="envelope"/><p className = "Footer_menu_item">bookshop@gmail.com</p></li>
+                      <li className = "social"><img className = "imgsize" src={phone} alt="phone call"/><p className = "Footer_menu_item">+5 (036) 447 37 38</p></li>
                       <li className = "Footer_menu_social">
-                       <img src={facebook} alt="facebook"/>
+                       <img className = "imgsize" src={facebook} alt="facebook"/>
                       </li>
                     </ul>
-                    <ul className = "Footer_menu">
+                    <ul className = "Footer_menu disnone">
                       <li className = "Footer_menu_list">How To Pay</li>
                       <li className = "Footer_menu_paypal"></li>                  
                       <li className = "Footer_menu_visa"></li>
