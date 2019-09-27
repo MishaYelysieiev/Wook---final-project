@@ -61,6 +61,9 @@
     }
     &__empty{
       font-size: 14px;
+        & img {
+           width: 300px;
+        }
     }
   }
 }
