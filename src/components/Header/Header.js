@@ -13,8 +13,16 @@ import './Header.scss';
 
 document.addEventListener('click',function (e) {
     const menu = document.querySelector('#dropDownMenu');
-    if(menu.classList.contains('opened')){
+    const search = document.querySelector('#search');
+    const searchInput = document.querySelector('.search_input');
+    const searchIcon = document.querySelector('.search_icon');
+    if(menu.classList.contains('opened') && !e.target.classList.contains('nav_category') && !e.target.classList.contains('nav_burger')){
         menu.classList.remove('opened');
+    } if(search.classList.contains('opened') && !e.target.classList.contains('search_input') && !e.target.classList.contains('search_icon') && e.target.id!=='search'){
+        searchInput.value = '';
+        search.classList.remove('opened');
+        searchIcon.classList.remove('opened');
+        searchInput.classList.remove('opened');
     }
 });
 
@@ -36,14 +44,16 @@ document.addEventListener('keyup',function (e) {
 
 class Header extends React.Component {
 
-    dropDownMenu() {
+    dropDownMenu(e) {
         const menu = document.querySelector('#dropDownMenu');
         menu.classList.toggle('opened');
+
     }
 
     checkOpenedDropDown() {
         const menu = document.querySelector('#dropDownMenu');
         menu.classList.remove('opened');
+
     }
 
     openSearchBar() {
@@ -94,9 +104,9 @@ class Header extends React.Component {
                 <div className="Header_wrapper">
                     <Logo click={this.checkOpenedDropDown.bind(this)}/>
                     <nav className="nav">
-                        <Link onClick={this.checkOpenedDropDown} className='nav_link' to='/'>Home</Link>
-                        <Link className='nav_link' to='#' onClick={this.dropDownMenu}>Category</Link>
-                        {/*<Link onClick={this.checkOpenedDropDown} className='nav_link' to='/sale'>Sale</Link>*/}
+                        <Link onClick={this.checkOpenedDropDown} className='nav_link nav_home' to='/'>Home</Link>
+                        <Link className='nav_link nav_category' to='#' onClick={this.dropDownMenu}>Category</Link>
+                        <Link className='nav_link nav_burger' to='#' onClick={this.dropDownMenu}></Link>
                     </nav>
                     <div className="contact">
                         <div className="contact_item">

@@ -9,6 +9,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     &_wrapper {
         display: flex;
     }
@@ -107,10 +108,19 @@
 
 
 @media screen and (max-width: 768px) {
+<<<<<<< HEAD
     .Logo {
         display: none;
     }
     .Footer {
+=======
+
+    .Footer {
+
+        & .Logo {
+            display: none;
+        }
+>>>>>>> d901e8c65a130c1f6f9b86e683635528224a0c82
         
         &_wrapper {
             margin: 0 auto;
