@@ -108,13 +108,11 @@
 
 
 @media screen and (max-width: 768px) {
-
     .Footer {
 
         & .Logo {
             display: none;
         }
-        
         &_wrapper {
             margin: 0 auto;
             width: 80vw;
@@ -136,6 +134,7 @@
     .disnone {
         display: none;
     }
+    
     .Footer_menu {
         margin-right: 25px;
         
