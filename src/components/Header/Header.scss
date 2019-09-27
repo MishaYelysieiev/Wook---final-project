@@ -21,6 +21,10 @@
   color: #134442;
   transition: 0.4s;
 
+  &_burger{
+    display: none;
+  }
+
   &.hidden {
     opacity: 0;
   }
@@ -145,7 +149,7 @@
     transition: 0.4s;
 
     &.opened {
-      margin-right: 3vw;
+      margin-right: 1vw;
 
       & .iconItem{
         fill: #9AE5E6;
@@ -182,3 +186,129 @@
   display: none;
   line-height: 25px;
 }
+
+@media screen and (max-width: 1200px) {
+
+  .Header_wrapper{
+    padding: 22px 60px;
+
+  }
+
+  .search_input.opened{
+    width: 40vw;
+  }
+
+  .nav_link{
+    margin:0;
+  }
+
+  .contact_item{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .nav.hidden{
+    opacity: 1;
+  }
+
+  .nav_burger{
+    display: block;
+    background-image: url('./img/menu.png');
+    height: 20px;
+    width: 20px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .nav_home{
+    display: none;
+  }
+
+  .cart_indicator{
+    width: 17px;
+    height: 17px;
+    font-size: 10px;
+    line-height: 17px;
+  }
+
+  .nav_link:hover:after {
+    width: 0;
+  }
+
+  .nav_category{
+    display: none;
+  }
+
+  .tools_link{
+    margin:0 12px;
+
+    & svg {
+      height: 20px;
+      width: inherit;
+
+    }
+
+    &.search{
+      position: absolute;
+      left:20vw;
+
+      & .search_input{
+        transform: translateX(25%);
+        height: 70%;
+        font-size: 14px;
+
+      }
+    }
+  }
+
+  .category{
+    align-items: flex-start;
+    flex-direction: column;
+    height: initial;
+    background: #134442;
+    padding: 0;
+    height: calc(100vh - 60px);
+
+    &_item{
+      padding: 20px 29px;
+      color: #fff;
+      border-bottom: 1px solid #0096A1;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: left;
+      flex: 1 0 auto;
+      display: flex;
+      align-items: center;
+
+
+    }
+  }
+
+  .Header_wrapper{
+    min-height: 60px;
+    padding: 9px 25px;
+
+
+
+    & .Logo{
+      position: absolute;
+      transform: translate(-50%,-50%);
+      left:50%;
+
+
+      & svg{
+        height: 40px;
+        width: inherit;
+      }
+
+
+    }
+  }
+}
+
