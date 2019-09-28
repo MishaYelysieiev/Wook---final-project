@@ -94,11 +94,21 @@ class Header extends React.Component {
         }
     }
 
+    checkLogin() {
+        if(document.cookie.includes('_login')){
+            // let token = document.cookie.split(';').filter(el=>el.split('_login').length)[0].split('=')[1];
+            return '/cabinet/contact-information'
+        } else {
+           return '/login'
+        }
+    }
+
     componentDidMount() {
         this.checkCookieCart();
     }
 
     render() {
+        this.profileLink = this.checkLogin();
         return (
             <div className='Header'>
                 <div className="Header_wrapper">
@@ -127,7 +137,7 @@ class Header extends React.Component {
                             {cartIcon()}
                             <span className='cart_indicator'></span>
                         </Link>
-                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to='/cabinet/contact-information'>
+                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to={this.profileLink}>
                             {accountIcon()}
                         </Link>
                     </div>

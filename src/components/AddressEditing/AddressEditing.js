@@ -12,7 +12,7 @@ class AddressEditing extends React.Component {
 
     fetchData() {
         let url = '/api/current';
-        let bearer = 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkODBiN2M3MGY4NTE0NmQyNTcyOTQ0ZSIsImZpcnN0TmFtZSI6IlRlc3QiLCJsYXN0TmFtZSI6IlVzZXIxMSIsInVzZXJFbWFpbCI6InRlc3QxMUB0ZXN0LmNvbSIsImlhdCI6MTU2ODc1MzMxNSwiZXhwIjoxNTY4NzU2OTE1fQ.6gCbeRk_MIdu4c6cQA_B9sAvWh4QWFpK6twrMjKrlCQ';
+        let bearer = document.cookie.split(';').filter(el=>el.includes('_login'))[0].split('=')[1];
         fetch(url, {
             method: 'GET',
             headers: {
