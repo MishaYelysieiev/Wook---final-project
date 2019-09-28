@@ -1,0 +1,138 @@
+.LoginForm {
+  position: relative;
+  top: 148px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 140px;
+  &__container {
+    width: 1006px;
+    height: 435px;
+    border: 1px solid #0096A1;
+    box-sizing: border-box;
+    border-radius: 5px;
+    display: flex;
+  }
+}
+
+.login-block {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #134442;
+
+  &__container{
+    margin: 64px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &__title {
+    font-size: 36px;
+    //margin-bottom: 29px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 134px;
+
+    label {
+      padding-left: 1px;
+      margin-bottom: 5px;
+    }
+  }
+
+  &__input {
+    width: 250px;
+    padding: 7px;
+    border: 1px solid #775B59;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin-bottom: 12px;
+  }
+  
+  &__forgot-password-btn {
+    color: #775B59;
+    font-size: 12px;
+    text-decoration: underline;
+    margin-bottom: 40px;
+  }
+
+  &__submit-btn {
+    //position: relative;
+    //bottom: -28px;
+    &:hover {
+      box-shadow: 0 20px 9px -16px #9AE5E6;
+    }
+  }
+}
+
+.create-account-block {
+  width: 50%;
+}
+
+.btn {
+  background-color: #9AE5E6;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #134442;
+  cursor: pointer;
+  padding: 10px 41px;
+  font-family: Open Sans, sans-serif;
+  align-self: center;
+  line-height: 24px;
+  transition: .2s;
+}
+
+.create-account-block {
+  background-color: #0096A1;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  position: relative;
+
+  &__title {
+    font-size: 36px;
+    color: #fff;
+  }
+  
+  &__container{
+    margin: 64px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &__create-acc-btn {
+    //position: absolute;
+    //bottom: 96px;
+    background-color: #fff;
+    padding: 10px 30px;
+    z-index: 1;
+    &:hover {
+      box-shadow: 0 20px 9px -16px #fff;
+    }
+
+  }
+
+  &__registration-bg {
+    position: absolute;
+    bottom: 0;
+    padding: 0 19px 22px;
+  }
+
+}
+
+
