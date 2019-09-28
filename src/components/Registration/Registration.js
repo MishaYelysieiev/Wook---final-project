@@ -66,6 +66,8 @@ class Registration extends React.Component {
             .then(data => {
                     document.cookie = '_login =;max-age=0';
                     document.cookie = `_login = ${data.token};max-age=3600`;
+                    alert('Registration is successful!');
+                    window.location.href = '/';
                 }
             )
             .catch((error) => {
