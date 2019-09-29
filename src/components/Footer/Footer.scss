@@ -9,6 +9,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
     &_wrapper {
         display: flex;
     }
@@ -20,13 +21,18 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
-        padding-left: 110px;
+        padding-left: 90px;
+        
+        &_rights {
+            position: absolute;
+            bottom: 10px;
+        }
     }
 
 }
 .Footer_menu {
     text-align: left;
-    margin-right: 100px;
+    margin-right: 90px;
     &_list {
         font-size: 18px;
         color: #9AE5E6;
@@ -106,12 +112,24 @@
 }
 
 
-@media screen and (max-width: 768px) {
-    .Logo {
-        display: none;
-    }
+@media screen and (max-width: 1200px) {
     .Footer {
         
+        &_logo {
+            padding-left: 40px;
+        }
+    }
+    .Footer_menu {
+        margin-right: 60px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .Footer {
+
+        & .Logo {
+            display: none;
+        }
         &_wrapper {
             margin: 0 auto;
             width: 80vw;
@@ -133,6 +151,7 @@
     .disnone {
         display: none;
     }
+    
     .Footer_menu {
         margin-right: 25px;
         
