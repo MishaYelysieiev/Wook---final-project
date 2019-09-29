@@ -16,4 +16,9 @@ module.exports = (app) => {
     // Update the user
     app.put('/api/user', passport.authenticate('jwt', {session: false}), user.update);
 
+    // Google auth
+    app.get('/api/authentication/google/start', passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
+      
+    app.get('/api/authentication/google/redirect', passport.authenticate('google', { session: false }), user.generateUserToken);
+
 };

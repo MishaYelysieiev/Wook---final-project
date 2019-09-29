@@ -56,7 +56,19 @@ const User = new Schema({
     required: false,
     minlength: 5,
     maxlength: 1024
-  }
-});
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+  },
+  google: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
+}
+}, { timestamps: true });
 
 module.exports = mongoose.models.User || mongoose.model('User', User);
