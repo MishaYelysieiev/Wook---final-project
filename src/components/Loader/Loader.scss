@@ -1,0 +1,25 @@
+.Loader{
+  position: relative;
+  top: 20vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 30px;
+
+  & .Logo{
+    position: relative;
+    transform: rotate(0deg);
+    animation: rotate;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+  }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+
+  100% { transform: rotate(360deg);}
+}
+
+
