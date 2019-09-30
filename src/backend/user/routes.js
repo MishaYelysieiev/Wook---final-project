@@ -16,4 +16,10 @@ module.exports = (app) => {
     // Update the user
     app.put('/api/user', passport.authenticate('jwt', {session: false}), user.update);
 
+    // Google auth
+    app.post('/api/authentication/google', passport.authenticate('google-token',  {session: false}), user.generateUserToken);
+
+    // github auth
+    app.post('/api/authentication/facebook', passport.authenticate('facebook-token',  {session: false}), user.generateUserToken);
+      
 };

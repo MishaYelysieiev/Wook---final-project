@@ -229,3 +229,40 @@ exports.update = async (req, res) => {
   }
 
 };
+
+  exports.generateUserToken = async (req, res) => {
+    try {
+      if (!req.user) {
+          return res.send(401, 'User Not Authenticated');
+      }
+       
+      // Find the user
+      const newUser = await req.user;
+  
+      // Generate token
+       const {
+        id,
+        firstName: userFirstName,
+        lastName: userLastName,
+        email: userEmail
+      } = await newUser;
+      // In jwt.sign set the data that you want to get
+      const token = await jwt.sign({
+        id,
+        userFirstName,
+        userLastName,
+        userEmail
+      }, jwtSecret, {
+        expiresIn: 3600
+      });
+      const bearerToken = `Bearer ${token}`;
+      res.json({
+        token: bearerToken
+      });
+    
+    } catch (err) {
+      console.log (err)
+      res.status(400).send(err);
+    }
+  
+  };
