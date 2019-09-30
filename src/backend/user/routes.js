@@ -17,8 +17,9 @@ module.exports = (app) => {
     app.put('/api/user', passport.authenticate('jwt', {session: false}), user.update);
 
     // Google auth
-    app.get('/api/authentication/google/start', passport.authenticate('google', { session: false, scope: ['profile', 'email'] }));
-      
-    app.get('/api/authentication/google/redirect', passport.authenticate('google', { session: false }), user.generateUserToken);
+    app.post('/api/authentication/google', passport.authenticate('google-token',  {session: false}), user.generateUserToken);
 
+    // github auth
+    app.post('/api/authentication/facebook', passport.authenticate('facebook-token',  {session: false}), user.generateUserToken);
+      
 };

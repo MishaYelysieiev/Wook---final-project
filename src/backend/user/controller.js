@@ -231,9 +231,13 @@ exports.update = async (req, res) => {
 };
 
   exports.generateUserToken = async (req, res) => {
-        try {
+    try {
+      if (!req.user) {
+          return res.send(401, 'User Not Authenticated');
+      }
+       
       // Find the user
-      const newUser = await User.findById(req.user._id);
+      const newUser = await req.user;
   
       // Generate token
        const {
