@@ -11,27 +11,30 @@ import accountIcon from '../Icons/Icon/accountIcon';
 
 import './Header.scss';
 
-document.addEventListener('click',function (e) {
+document.addEventListener('click', function (e) {
     const menu = document.querySelector('#dropDownMenu');
     const search = document.querySelector('#search');
     const searchInput = document.querySelector('.search_input');
     const searchIcon = document.querySelector('.search_icon');
-    if(menu.classList.contains('opened') && !e.target.classList.contains('nav_category') && !e.target.classList.contains('nav_burger')){
+    if (menu.classList.contains('opened') && !e.target.classList.contains('nav_category') && !e.target.classList.contains('nav_burger')) {
         menu.classList.remove('opened');
-    } if(search.classList.contains('opened') && !e.target.classList.contains('search_input') && !e.target.classList.contains('search_icon') && e.target.id!=='search'){
+    }
+    if (!e.target.classList.contains("searchIconWrapper") && !e.target.classList.contains('search_input') && !e.target.classList.contains('search_icon') && e.target.id !== 'search' && search.classList.contains('opened')) {
         searchInput.value = '';
         search.classList.remove('opened');
         searchIcon.classList.remove('opened');
         searchInput.classList.remove('opened');
+        document.querySelector('.nav').classList.remove('hidden');
+
     }
 });
 
-document.addEventListener('keyup',function (e) {
+document.addEventListener('keyup', function (e) {
     const search = document.querySelector('#search');
     const searchInput = document.querySelector('.search_input');
     const searchIcon = document.querySelector('.search_icon');
 
-    if(e.key==='Enter' && searchInput.value){
+    if (e.key === 'Enter' && searchInput.value) {
         window.location.replace(`/book_search/${searchInput.value.split(' ').join('&')}`);
         searchInput.value = '';
         search.classList.remove('opened');
@@ -39,7 +42,6 @@ document.addEventListener('keyup',function (e) {
         searchInput.classList.remove('opened');
     }
 });
-
 
 
 class Header extends React.Component {
@@ -85,13 +87,23 @@ class Header extends React.Component {
 
     checkCookieCart() {
         let cart = document.querySelector('.cart_indicator');
-        if(document.cookie.includes('_cart')){
-            let cookie = document.cookie.split(';').filter(el=>el.split('_cart').length)[0].split('=')[1];
+        if (document.cookie.includes('_cart')) {
+            let cookie = document.cookie.split(';').filter(el => el.includes('_cart'))[0].split('=')[1];
             let cookieArr = cookie.split(' ');
-            cart.innerText=`${cookieArr.length}`;
-            cart.style.display='block';
+            cart.innerText = `${cookieArr.length}`;
+            cart.style.display = 'block';
 
         }
+    }
+
+    checkLogin() {
+
+        if (document.cookie.includes('_login')) {
+            return '/cabinet/contact-information';
+        } else {
+            return '/login';
+        }
+
     }
 
     componentDidMount() {
@@ -99,6 +111,7 @@ class Header extends React.Component {
     }
 
     render() {
+        this.profileLink = this.checkLogin();
         return (
             <div className='Header'>
                 <div className="Header_wrapper">
@@ -127,7 +140,7 @@ class Header extends React.Component {
                             {cartIcon()}
                             <span className='cart_indicator'></span>
                         </Link>
-                        <Link onClick={this.checkOpenedDropDown} className='tools_link' to='/cabinet/contact-information'>
+                        <Link onClick={this.checkLogin} className='tools_link account_link' to={this.profileLink}>
                             {accountIcon()}
                         </Link>
                     </div>
