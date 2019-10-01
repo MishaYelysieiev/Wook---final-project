@@ -8,6 +8,7 @@ class CategorySection extends React.Component {
     constructor(props) {
         super(props);
 
+        this.onScroll = this.onScroll.bind(this);
         this.initialNumberOfProductCards = 8;
         this.addedNumberOfProductCards = 8;
 
@@ -45,6 +46,7 @@ class CategorySection extends React.Component {
 
     componentDidMount() {
        this.fetchData();
+       this.scrollListener = window.addEventListener("scroll", this.onScroll, false );
     }
 
     componentDidUpdate(prevProps) {
@@ -53,9 +55,26 @@ class CategorySection extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.onScroll, false );
+    }
+
     handleChange = (e) => {
         this.fetchData(e.target.value);
     };
+
+    handleScroll = () => { 
+        let lastLi = document.querySelector(".CategorySection_product-list > div.ProductCard:last-child");
+        let lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+        let pageOffset = window.pageYOffset + window.innerHeight;
+      if (pageOffset > lastLiOffset) {
+             this.addMoreData();
+        }
+      };
+
+      onScroll(e) {
+        this.handleScroll(e);
+      }
 
     addMoreData = () => {
         let numberOfProductCards = this.state.numberOfProductCards + this.addedNumberOfProductCards;
