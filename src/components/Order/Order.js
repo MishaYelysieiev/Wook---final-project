@@ -36,7 +36,7 @@ class Order extends React.Component {
                     </div>
                     <div className="delivery-price">
                         <span className="delivery-price-total">Total </span>
-                        <span className="delivery-price-amount">{order.currency}{order.orderTotal}</span>
+                        <span className="delivery-price-amount">{order.currency + order.orderTotal}</span>
                     </div>
                 </div>
             </div>

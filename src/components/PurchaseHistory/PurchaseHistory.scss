@@ -1,4 +1,9 @@
 .PurchaseHistory {
   max-width: 1200px;
   margin: 40px auto 100px;
+  &_empty {
+    font-size: 16px;
+    font-family: "Open Sans", sans-serif;
+    color: #331B22;
+  }
 }
