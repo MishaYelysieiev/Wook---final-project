@@ -68,7 +68,9 @@ class AddressEditing extends React.Component {
         let address = {};
         if(this.state.externalData) {
             user = this.state.externalData;
-            address = user.address;
+            if(user.address) {
+                address = user.address;
+            }
         }
         return (
             <div className="AddressEditing">
