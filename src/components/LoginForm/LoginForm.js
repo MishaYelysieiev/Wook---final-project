@@ -189,18 +189,21 @@ class LoginForm extends React.Component {
                         <div className='login-block__auth'>
                             <GoogleLogin
                             clientId= {GOOGLE_KEY}
-                            buttonText="Login"
+                            className='googleClass'
+                            buttonText="Google"
                             onSuccess={this.googleResponse}
                             onFailure={this.onFailure}  
                             >
-                            <span> Login with Google</span>
                             </GoogleLogin>
+
                             <FacebookLogin                                
                                 appId={FACEBOOK_KEY}
+                                cssClass='fbclass'
                                 autoLoad={false}
+                                icon="fa-facebook"
+                                textButton="Facebook"
                                 fields="name,email,picture"
                                 callback={this.facebookResponse} />
-
                         </div>
                     </div>
                     <div className='create-account-block'>
