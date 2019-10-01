@@ -22,7 +22,7 @@ class Cart extends React.Component {
     }
 
     removeItemFromCookie(id) {
-        let books = document.cookie.split(';').filter(el => el.split('_cart').length)[0].split('=')[1].split(' ');
+        let books = document.cookie.split(';').filter(el => el.includes('_cart'))[0].split('=')[1].split(' ');
         books.splice(books.find(el => el === id), 1);
         let date = new Date();
         date.setDate(date.getDate() + 1);
