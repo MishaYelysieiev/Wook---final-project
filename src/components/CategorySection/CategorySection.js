@@ -63,19 +63,18 @@ class CategorySection extends React.Component {
     };
 
     getProductCardList() {
-        let externalDataList = this.state.externalData.slice();
-        return externalDataList.map(productCard => <ProductCard key={productCard._id} productCard={productCard}/>)
+        //let externalDataList = this.state.externalData.slice();
+        return this.state.externalData.map(productCard => <ProductCard key={productCard._id} productCard={productCard}/>)
     }
 
     render() {
         const {category} = this.props.match.params;
         let list = [];
-        //let productCardList = [];
+        let button = '';
         if (this.state.externalData) {
             list = this.getProductCardList();
-            //productCardList = this.getData(list);
+            button = (list.length === this.state.numberOfProductCards) && <button id="btn-more" onClick={() => this.addMoreData()} className="btn-view">View more</button>
         }
-        //const button = (list.length > productCardList.length) && <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button>
         return (
             <div className="CategorySection">
                 <h1 className="CategorySection_title">{CategorySection.getHeader(category)} Books</h1>
@@ -94,8 +93,7 @@ class CategorySection extends React.Component {
                 <div className="CategorySection_product-list">
                     {list}
                 </div>
-                {/*{button}*/}
-                <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button>
+                {button}
             </div>
         );
     }
