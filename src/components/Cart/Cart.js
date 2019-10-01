@@ -22,7 +22,7 @@ class Cart extends React.Component {
     }
 
     removeItemFromCookie(id) {
-        let books = document.cookie.split(';').filter(el => el.split('_cart').length)[0].split('=')[1].split(' ');
+        let books = document.cookie.split(';').filter(el => el.includes('_cart'))[0].split('=')[1].split(' ');
         books.splice(books.find(el => el === id), 1);
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -325,7 +325,7 @@ class Cart extends React.Component {
                 component = <Loader/>
             }else {
                 component = <div className='Cart__empty'>
-                    <h1>There are no products to show, please add something to the cart before!</h1>
+                    <h1>There are no products in cart, please add something to the cart before!</h1>
                     <img src={emptyCart} alt="empty"/>
                 </div>
             }
