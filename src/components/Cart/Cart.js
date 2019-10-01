@@ -325,7 +325,7 @@ class Cart extends React.Component {
                 component = <Loader/>
             }else {
                 component = <div className='Cart__empty'>
-                    <h1>There are no products to show, please add something to the cart before!</h1>
+                    <h1>There are no products in cart, please add something to the cart before!</h1>
                     <img src={emptyCart} alt="empty"/>
                 </div>
             }

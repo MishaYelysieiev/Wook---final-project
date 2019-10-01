@@ -16,8 +16,19 @@
 
     & img{
       height: 300px;
-      width: 600px;
+      width: 400px;
       margin: 0 auto;
+    }
+
+    & h1{
+      max-width: 1210px;
+      width: 80vw;
+      font-size: 36px;
+      border-bottom: 1px solid #331B22;
+      color: #775B59;
+      margin: 0 auto;
+      padding-bottom: 5px;
+      line-height: 40px;
     }
   }
 
@@ -246,14 +257,17 @@
         margin-bottom: 50px;
         
         &__empty{
-            font-size: 20px;
             line-height: 24px;
             padding: 0 10px;
             
             & img{
-              height: 120px;
-              width: 250px;
+              height: 300px;
+              width: 400px;
               margin: 20px auto;
+            }
+
+            & h1{
+              font-size: 20px;
             }
           }
         
