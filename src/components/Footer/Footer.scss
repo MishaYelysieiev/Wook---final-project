@@ -1,6 +1,6 @@
 .Footer {
     background-color: #134442;
-    width: 100vw;
+    max-width: 100%;
     padding: 20px;
     position: relative;
     top: 20vh;
@@ -21,13 +21,18 @@
         flex-direction: column;
         justify-content: space-around;
         align-items: flex-start;
-        padding-left: 110px;
+        padding-left: 90px;
+        
+        &_rights {
+            position: absolute;
+            bottom: 10px;
+        }
     }
 
 }
 .Footer_menu {
     text-align: left;
-    margin-right: 100px;
+    margin-right: 90px;
     &_list {
         font-size: 18px;
         color: #9AE5E6;
@@ -106,6 +111,18 @@
     }
 }
 
+
+@media screen and (max-width: 1200px) {
+    .Footer {
+        
+        &_logo {
+            padding-left: 40px;
+        }
+    }
+    .Footer_menu {
+        margin-right: 60px;
+    }
+}
 
 @media screen and (max-width: 768px) {
     .Footer {

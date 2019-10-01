@@ -25,7 +25,7 @@
   color: #134442;
 
   &__container{
-    margin: 64px 0;
+    margin: 34px 0;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -71,6 +71,14 @@
     &:hover {
       box-shadow: 0 20px 9px -16px #9AE5E6;
     }
+  }
+
+  &__auth{
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 85%;
   }
 }
 
