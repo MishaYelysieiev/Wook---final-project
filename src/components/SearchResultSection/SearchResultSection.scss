@@ -1,7 +1,11 @@
 .SearchResultSection {
-  position: relative;
-  top: 148px;
-
+    position: relative;
+    top: 148px;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   &_title {    
     margin: 0 auto;
     padding-bottom: 5px;
@@ -40,7 +44,7 @@
     font-size: 20px;
 
     & img{
-      margin: 0 auto;
+      margin: 10px auto;
       height: 80%;
     }
   }
@@ -61,6 +65,7 @@
     }
     &__empty{
       font-size: 14px;
+      padding: 10px;
         & img {
            width: 300px;
         }

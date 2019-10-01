@@ -95,6 +95,55 @@
   }
 }
 
+@media screen and (max-width: 640px) {
+    .registration {
+        margin-bottom: 20px;
+        position: static;
+        height: inherit;
+        
+        &__title {
+            font-size: 26px;
+        }
+        &__container {
+            width: inherit;
+            height: inherit;
+            padding: 20px;
+            margin: 0 auto;
+            margin-top: 20vh;
+        }
+        
+        &__form {
+            flex-direction: column;
+            
+            label {
+                position: static;
+                font-size: 12px;
+            }
+        }
+        
+        &__checkbox-container {
+            position: static;
+            display: flex;
+            width: 250px;
+            
+            input {
+                margin: 0;
+            }
+        }
+        
+        &__name-form {
+            position: static;
+        }
+        
+        &__submit-btn {
+            align-self: center;
+            position: static;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+    }
+}
+
 
 
 
