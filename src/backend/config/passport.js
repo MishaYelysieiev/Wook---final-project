@@ -1,10 +1,11 @@
 const JwtStrategy = require('passport-jwt').Strategy,
   ExtractJwt = require('passport-jwt').ExtractJwt;
+  const GoogleTokenStrategy = require('passport-google-token').Strategy;
+  const FacebookTokenStrategy = require('passport-facebook-token');
 // eslint-disable-next-line no-unused-vars
 const mongoose = require('mongoose');
 
-// const { jwtSecret } = require('../config/config.js') || process.env.jwtSecret; // for localhost - decooment
-const jwtSecret =  process.env.jwtSecret; // for localhost have to be comment
+const jwtSecret =  process.env.jwtSecret; 
 const User = require('../user/model');
 
 
@@ -25,4 +26,24 @@ module.exports = passport => {
         .catch(err => console.log(err));
     })
   );
+
+  passport.use(new GoogleTokenStrategy({
+    clientID: process.env.REACT_APP_GOOGLEId,
+    clientSecret: process.env.GoogleSecret
+},
+  function (accessToken, refreshToken, profile, done) {
+      User.upsertGoogleUser(accessToken, refreshToken, profile, function(err, user) {
+          return done(err, user);
+      });
+  }));
+
+  passport.use(new FacebookTokenStrategy({
+    clientID: process.env.REACT_APP_FACEBOOK_KEY,
+    clientSecret: process.env.FACEBOOK_SECRET,
+    passReqToCallback: true
+}, function(req, accessToken, refreshToken, profile, done) {
+    User.upsertFbUser(accessToken, refreshToken, profile, function(err, user) {
+      return done(err, user);
+  });
+}));
 };

@@ -7,12 +7,12 @@
 
   &__empty{
     position: relative;
-    top: 15vh;
+    top: 20vh;
     height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 40px;
+    font-size: 30px;
 
     & img{
       height: 300px;
@@ -22,7 +22,7 @@
   }
 
   &_wrapper{
-    min-height: 56vh;
+    min-height: 53vh;
   }
 
   &_container{
