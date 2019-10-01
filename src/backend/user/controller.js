@@ -186,10 +186,24 @@ exports.update = async (req, res) => {
       address
     } = req.body;
 
-    // Crypt the password
+
+    // Find the user
+    const user = await User.findOne({
+      email
+    });
+    if (!user) {
+      errors.email = 'User not found!'
+      return res.status(404).json(errors);
+    }
+    // check if password changed
+    const samePassword = await password === user.password;
+    // userInfo
     const salt = await bcrypt.genSalt(10);
-    // userInfo.
-    password = await bcrypt.hash(password, salt);
+    if (!samePassword){
+      password = await bcrypt.hash(password, salt);
+    } else {
+      password = await user.password
+    }
     // Update the user
     const newUser = await User.findByIdAndUpdate(req.user._id, {
       firstName,
@@ -229,3 +243,40 @@ exports.update = async (req, res) => {
   }
 
 };
+
+  exports.generateUserToken = async (req, res) => {
+    try {
+      if (!req.user) {
+          return res.send(401, 'User Not Authenticated');
+      }
+       
+      // Find the user
+      const newUser = await req.user;
+  
+      // Generate token
+       const {
+        id,
+        firstName: userFirstName,
+        lastName: userLastName,
+        email: userEmail
+      } = await newUser;
+      // In jwt.sign set the data that you want to get
+      const token = await jwt.sign({
+        id,
+        userFirstName,
+        userLastName,
+        userEmail
+      }, jwtSecret, {
+        expiresIn: 3600
+      });
+      const bearerToken = `Bearer ${token}`;
+      res.json({
+        token: bearerToken
+      });
+    
+    } catch (err) {
+      console.log (err)
+      res.status(400).send(err);
+    }
+  
+  };

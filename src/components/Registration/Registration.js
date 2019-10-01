@@ -8,11 +8,11 @@ class Registration extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'test4@mail.com',
-            password: '123321',
-            passwordConfirmation: '123321',
-            firstName: 'test4',
-            lastName: 'testov4',
+            email: '',
+            password: '',
+            passwordConfirmation: '',
+            firstName: '',
+            lastName: '',
             _login: '',
             isSignedUp: false
         };
@@ -47,13 +47,7 @@ class Registration extends React.Component {
                 'firstName': firstName,
                 'lastName': lastName,
                 'email': email,
-                'password': password,
-                'phone': '0951736412',
-                'address': {
-                    'country': 'USA',
-                    'city': 'Oklahoma City',
-                    'street': '2609  Ottis Street'
-                }
+                'password': password
             })
         })
             .then(response => {

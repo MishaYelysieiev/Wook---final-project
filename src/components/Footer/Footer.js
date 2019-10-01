@@ -33,7 +33,7 @@ class Footer extends React.Component {
                       <li className ="Footer_menu_list">Category</li>
                       <li className = "Footer_menu_item"> <Link to='/category/html/css'>HTML / CSS</Link> </li>
                       <li className = "Footer_menu_item"> <Link to='/category/javascript'>Java Script</Link> </li>
-                      <li className = "Footer_menu_item"> <Link to='/category/pyton'>Pyton</Link> </li>
+                      <li className = "Footer_menu_item"> <Link to='/category/python'>Python</Link> </li>
                       <li className = "Footer_menu_item"> <Link to='/category/php'>PHP</Link> </li>
                       <li className = "Footer_menu_item"> <Link to='/category/all'>All books</Link></li>
                     </ul>
