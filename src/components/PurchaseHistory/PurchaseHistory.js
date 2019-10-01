@@ -10,59 +10,38 @@ class PurchaseHistory extends React.Component {
             externalData: null,
             bookData: null
         };
-        this.orders = [
-            {
-                "number": "45-433",
-                "date": "20.04.2019",
-                "user": "user1",
-                "books": [{"book_id":"5d762f9be927b13ff5a9b57c", "quantity": 1}, {"book_id": "5d762fcae927b13ff5a9b583", "quantity": 2}],
-                "orderTotal": 99.05,
-                "currency": "$",
-                "delivery_address": {
-                    "country": "USA",
-                    "city": "Oklahoma City",
-                    "street": "2609  Ottis Street"
-                }
-            },
-            {
-                "number": "40-433",
-                "date": "20.01.2019",
-                "user": "user1",
-                "books": [{"book_id": "5d762fcae927b13ff5a9b583", "quantity": 2}],
-                "orderTotal": 48.05,
-                "currency": "$",
-                "delivery_address": {
-                    "country": "USA",
-                    "city": "Oklahoma City",
-                    "street": "2609  Ottis Street"
-                }
-            }
-        ];
     }
 
-    // fetchOrders() {
-    //     let url = '/api/current';
-    //     fetch(url)
-    //         .then(response => response.json())
-    //         .then(data => this.setState({externalData: data}));
-    // }
+    fetchOrders() {
+        let bearer = document.cookie.split(';').filter(el => el.includes('_login'))[0].split('=')[1];
+        let url = '/user/order';
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': bearer,
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => this.setState({externalData: data}));
+    }
 
     componentDidMount() {
-        //this.fetchOrders();
+        this.fetchOrders();
     }
 
     getOrders() {
-        return this.orders.map(order =>{
-            return (
-                <div className="PurchaseHistory_order">
-                    <Order key={order.number} order={order}/>
-                </div>
-            );
-        });
+        return this.state.externalData.map(order => <Order key={order.number} order={order}/>);
     }
 
     render() {
-        let orders = this.getOrders();
+        let orders = '';
+        if(this.state.externalData) {
+            orders = this.getOrders();
+        }
+        else {
+            orders = <div className="PurchaseHistory_empty"><h1>There is no history to show, please make some order before!</h1></div>
+        }
         return (
             <div className="PurchaseHistory">
                 {orders}
