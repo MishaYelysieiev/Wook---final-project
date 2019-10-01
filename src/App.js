@@ -31,7 +31,6 @@ function App() {
             <Route path='/login/' component={LoginForm}/>
             <Route path='/registration/' component={Registration}/>
             <Route path='/cart' component={Cart}/>
-            <Route path='/cart' component={Cart} />
             <Route path='/cabinet/' component={Cabinet}/>
             <Footer/>
         </div>

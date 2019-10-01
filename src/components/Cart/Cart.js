@@ -3,6 +3,8 @@ import {Link} from "react-router-dom";
 
 import './Cart.scss';
 
+import Loader from '../Loader/Loader';
+
 const emptyCart = require('./empty-cart.png');
 
 
@@ -13,13 +15,14 @@ class Cart extends React.Component {
         this.state = {
             data: [],
             user: {},
-            address: {}
+            address: {},
+            pending:true
         }
 
     }
 
     removeItemFromCookie(id) {
-        let books = document.cookie.split(';').filter(el => el.split('_cart').length)[0].split('=')[1].split(' ');
+        let books = document.cookie.split(';').filter(el => el.includes('_cart'))[0].split('=')[1].split(' ');
         books.splice(books.find(el => el === id), 1);
         let date = new Date();
         date.setDate(date.getDate() + 1);
@@ -169,7 +172,6 @@ class Cart extends React.Component {
     async componentDidMount() {
         if (document.cookie.includes('_cart')) {
             this.arr = document.cookie.split(';').filter(el => el.includes('_cart'))[0].split('=')[1].split(' ');
-            console.log(this.arr);
             let data = [];
             const that = this;
             await this.arr.forEach(async function (el) {
@@ -183,7 +185,8 @@ class Cart extends React.Component {
 
                 await data.push(book);
 
-                that.setState({data: data})
+                that.setState({data: data});
+                that.setState({pending: false});
 
 
             });
@@ -209,7 +212,7 @@ class Cart extends React.Component {
 
         let component = null;
 
-        if (this.arr) {
+        if (!this.state.pending) {
             const {data} = this.state;
 
             const arr = data.map((el) => el);
@@ -318,10 +321,15 @@ class Cart extends React.Component {
             }
 
         } else {
-            component = <div className='Cart__empty'>
-                <h1>There are no products to show, please add something to the cart before!</h1>
-                <img src={emptyCart} alt="empty"/>
-            </div>
+            if(document.cookie.includes('_cart')){
+                component = <Loader/>
+            }else {
+                component = <div className='Cart__empty'>
+                    <h1>There are no products to show, please add something to the cart before!</h1>
+                    <img src={emptyCart} alt="empty"/>
+                </div>
+            }
+
         }
 
         return (
