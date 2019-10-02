@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProductCard from "../ProductCard/ProductCard";
+import Loader from '../Loader/Loader';
 
 import './SearchResultSection.scss';
 
@@ -10,19 +11,17 @@ class SearchResultSection extends React.Component {
     constructor(props) {
         super(props);
 
-        // this.initialNumberOfProductCards = 8;
-        // this.addedNumberOfProductCards = 8;
-
-
         this.state = {
             externalData: null,
-            // numberOfProductCards: this.initialNumberOfProductCards
+            pending: true,
+            list: null
+            
         };
     }
 
-    fetchData() {
-        let {search} = this.props.match.params;
-        fetch(`/api/book_search`, {
+    async fetchData() {
+        let {search} = await this.props.match.params;
+        await fetch(`/api/book_search`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,58 +31,42 @@ class SearchResultSection extends React.Component {
             })
         })
             .then(response => response.json())
-            .then(data => this.setState({externalData: data}));
+            .then(data => this.setState({externalData: data, pending: false }));
     }
 
-    componentDidMount() {
-       this.fetchData();
+    async componentDidMount() {
+       await this.fetchData();
     }
-
-    // handleChange = (e) => {
-    //     this.fetchData(e.target.value);
-    // };
-
-    // addMoreData = () => {
-    //     let numberOfProductCards = this.state.numberOfProductCards + this.addedNumberOfProductCards;
-    //     this.fetchData(this.state.sortBy, numberOfProductCards);
-    //     this.setState({externalData: data})
-    // };
 
     getProductCardList() {
-        let externalDataList = this.state.externalData.slice();
-        return externalDataList.map(productCard => <ProductCard key={productCard._id} productCard={productCard}/>)
+        return this.state.externalData.map(productCard => <ProductCard key={productCard._id} productCard={productCard}/>)
     }
 
-    render () {
-        let list = null;
+     render() {
         let {search} = this.props.match.params
-        //let productCardList = [];
-        // list = this.getProductCardList();
-        if (this.state.externalData === null) {
+        if (this.state.pending || this.state.externalData === null) {
             return (
-            <p>...loading</p>
+                <Loader/>
                 )
         } else {
-            if (this.state.externalData.length === 0 ) {
+            if (this.state.externalData.length === 0) {
                 return (
                     <div className="SearchResultSection">
                         <h1 className="SearchResultSection_title">We're  Sorry!</h1>
                         <div className='SearchResultSection__empty'>
                             <h1>We can't seem to find any products that match your search for "{search}"</h1>
                             <img src={emptyBook} alt="nothing found"/>
-                        </div>
-                        {/* <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button> */}
+                        </div>  
                     </div>
                 );
             } else {
-                list = this.getProductCardList();
-                return (
+                let list =  this.getProductCardList()
+                return (                     
                     <div className="SearchResultSection">
                         <h1 className="SearchResultSection_title">Found books by "{search}" search</h1>
                         <div className="SearchResultSection_product-list">
                              {list}
                         </div>
-                        {/* <button id="btn-more" onClick={()=>this.addMoreData()} className="btn-view">View more</button> */}
                     </div>
                 );
             }   

@@ -108,10 +108,10 @@ class CategorySection extends React.Component {
                     <div className="sort-by">
                         <h3 className="sort-header">Sort by:</h3>
                         <select value={this.state.sortBy} onChange={(e) => this.handleChange(e)} className="sort-select">
-                            <option value="-rating" className="select-item">popularity</option>
-                            <option value="date" className="select-item">new first</option>
-                            <option value="price" className="select-item">price up</option>
-                            <option value="-price" className="select-item">price down</option>
+                            <option value="-rating" className="select-item">average rating</option>
+                            <option value="date" className="select-item">newness</option>
+                            <option value="price" className="select-item">price: low to high</option>
+                            <option value="-price" className="select-item">price: high to low</option>
                         </select>
                     </div>
                 </div>

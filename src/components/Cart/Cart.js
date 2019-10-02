@@ -15,7 +15,9 @@ class Cart extends React.Component {
         this.state = {
             data: [],
             user: {},
-            address: {},
+            country:'',
+            city:'',
+            street:'',
             pending:true
         }
 
@@ -147,9 +149,9 @@ class Cart extends React.Component {
             user: this.state.user._id||null,
             books: books,
             delivery_address: {
-                country: this.state.address.country||document.querySelector('.info-address .country input').value,
-                city: this.state.address.city||document.querySelector('.info-address .city input').value,
-                street: this.state.address.street||document.querySelector('.info-address .address input').value
+                country: this.state.country||document.querySelector('.info-address .country input').value,
+                city: this.state.city||document.querySelector('.info-address .city input').value,
+                street: this.state.street||document.querySelector('.info-address .address input').value
             },
         };
 
@@ -201,16 +203,18 @@ class Cart extends React.Component {
                     'Authorization': "Bearer " + token
                 }
             }).then(res => res.json()).then(data => that.setState({user: data, address: data.address}));
-
-
         }
 
     }
 
 
     render() {
-
         let component = null;
+        let user = {};
+        let address = {};
+        if(user.address) {
+            address = user.address;
+        }
 
         if (!this.state.pending) {
             const {data} = this.state;
@@ -291,18 +295,18 @@ class Cart extends React.Component {
                                 <div className="info-delivery">
                                     <div className="radio-wrapper">
                                         <label><input type="radio" name='deliveryMethod'/>Mail Delivery</label>
-                                        <label><input type="radio" name='deliveryMethod'/>Address Delivery</label>
+                                        <label><input type="radio" name='deliveryMethod' checked/>Address Delivery</label>
                                         <label><input type="radio" name='deliveryMethod'/>Pickup</label>
                                     </div>
                                     <div className="info-address">
                                         <label className='country'>Country <input type="text"
                                                                                   placeholder='Enter your country'
-                                                                                  defaultValue={this.state.address.country || ''}/></label>
+                                                                                  defaultValue={address.country}/></label>
                                         <label className='city'>City <input type="text" placeholder='Enter your city'
-                                                                            defaultValue={this.state.address.city || ''}/></label>
+                                                                            defaultValue={address.city}/></label>
                                         <label className='address'>Address <input type="text"
                                                                                   placeholder='Enter your address'
-                                                                                  defaultValue={this.state.address.street || ''}/></label>
+                                                                                  defaultValue={address.street}/></label>
                                     </div>
                                 </div>
                                 <h3>Payment</h3>
