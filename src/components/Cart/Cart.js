@@ -15,9 +15,7 @@ class Cart extends React.Component {
         this.state = {
             data: [],
             user: {},
-            country:'',
-            city:'',
-            street:'',
+            address: {},
             pending:true
         }
 
@@ -140,7 +138,11 @@ class Cart extends React.Component {
             books.push({book_id:el.id,quantity:`${el.querySelector('.item_counter').value}`})
         });
 
-
+        let user = {};
+        let address = {};
+        if(user.address) {
+            address = user.address;
+        }
         const  order = await {
             number: number,
             date: new Date().toDateString(),
@@ -149,9 +151,9 @@ class Cart extends React.Component {
             user: this.state.user._id||null,
             books: books,
             delivery_address: {
-                country: this.state.country||document.querySelector('.info-address .country input').value,
-                city: this.state.city||document.querySelector('.info-address .city input').value,
-                street: this.state.street||document.querySelector('.info-address .address input').value
+                country: address.country||document.querySelector('.info-address .country input').value,
+                city: address.city||document.querySelector('.info-address .city input').value,
+                street: address.street||document.querySelector('.info-address .address input').value
             },
         };
 
@@ -206,7 +208,6 @@ class Cart extends React.Component {
         }
 
     }
-
 
     render() {
         let component = null;
