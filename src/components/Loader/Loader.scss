@@ -1,11 +1,12 @@
 .Loader{
   position: relative;
   top: 20vh;
-  height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-size: 30px;
+  min-height: 85vh;
+  align-items: center;
 
   & .Logo{
     position: relative;
