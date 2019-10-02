@@ -8,13 +8,14 @@ class CategorySection extends React.Component {
     constructor(props) {
         super(props);
 
-        this.initialNumberOfProductCards = 8;
+        this.onScroll = this.onScroll.bind(this);
+
+        this.skipedNumberOfProductCards = 0;
         this.addedNumberOfProductCards = 8;
 
         this.state = {
             sortBy: "-rating",
-            externalData: null,
-            numberOfProductCards: this.initialNumberOfProductCards
+            externalData: []
         };
 
         this.categoryId = {
@@ -36,44 +37,64 @@ class CategorySection extends React.Component {
         }
     }
 
-    fetchData(sortBy = this.state.sortBy, numberOfProductCards = this.state.numberOfProductCards) {
+    fetchData(sortBy = this.state.sortBy) {
         let {category: categoryName} = this.props.match.params;
-        fetch(`/api/book/filter?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=0&limit=${numberOfProductCards}`)
+        fetch(`/api/book/filter?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=${this.skipedNumberOfProductCards}&limit=${this.addedNumberOfProductCards}`)
             .then(response => response.json())
-            .then(data => this.setState({externalData: data, sortBy: sortBy, numberOfProductCards: numberOfProductCards}));
+            .then(data => {
+                console.log(this.state.externalData);
+                this.setState({externalData: this.state.externalData.concat(data), sortBy: sortBy});
+            });
     }
 
     componentDidMount() {
        this.fetchData();
+       this.scrollListener = window.addEventListener("scroll", this.onScroll, false );
     }
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.category !== prevProps.match.params.category) {
-            this.fetchData(this.state.sortBy, this.initialNumberOfProductCards);
+            this.skipedNumberOfProductCards = 0;
+            this.setState({externalData: []});
+            this.fetchData(this.state.sortBy);
         }
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("scroll", this.onScroll, false );
     }
 
     handleChange = (e) => {
         this.fetchData(e.target.value);
     };
 
+    handleScroll = () => { 
+        let lastLi = document.querySelector(".CategorySection_product-list > div.ProductCard:last-child");
+        let lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
+        let pageOffset = window.pageYOffset + window.innerHeight;
+        if (pageOffset > lastLiOffset) {
+             this.addMoreData();
+        }
+    };
+
+    onScroll(e) {
+        this.handleScroll(e);
+    }
+
     addMoreData = () => {
-        let numberOfProductCards = this.state.numberOfProductCards + this.addedNumberOfProductCards;
-        this.fetchData(this.state.sortBy, numberOfProductCards);
+        this.skipedNumberOfProductCards += this.addedNumberOfProductCards;
+        this.fetchData(this.state.sortBy);
     };
 
     getProductCardList() {
-        //let externalDataList = this.state.externalData.slice();
         return this.state.externalData.map(productCard => <ProductCard key={productCard._id} productCard={productCard}/>)
     }
 
     render() {
         const {category} = this.props.match.params;
         let list = [];
-        let button = '';
         if (this.state.externalData) {
             list = this.getProductCardList();
-            button = (list.length === this.state.numberOfProductCards) && <button id="btn-more" onClick={() => this.addMoreData()} className="btn-view">View more</button>
         }
         return (
             <div className="CategorySection">
@@ -88,12 +109,10 @@ class CategorySection extends React.Component {
                             <option value="-price" className="select-item">price down</option>
                         </select>
                     </div>
-                    {/*<span className="sort-results">{productCardList.length} of {list.length} results</span>*/}
                 </div>
                 <div className="CategorySection_product-list">
                     {list}
                 </div>
-                {button}
             </div>
         );
     }

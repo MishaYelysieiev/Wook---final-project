@@ -196,7 +196,7 @@ class LoginForm extends React.Component {
                             >
                             </GoogleLogin>
 
-                            <FacebookLogin                                
+                            <FacebookLogin
                                 appId={FACEBOOK_KEY}
                                 cssClass='fbclass'
                                 autoLoad={false}
