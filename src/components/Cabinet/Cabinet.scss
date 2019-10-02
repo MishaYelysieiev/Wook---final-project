@@ -1,6 +1,6 @@
 .Cabinet {
   position: relative;
-  top: 150px;
+  top: 15vh;
   margin-bottom: 100px;
   &_nav {
     margin: 0 auto;
@@ -44,7 +44,9 @@
             
             & .exit {
                 position: absolute;
-                right: -5px;
+                right: -20px;
+                font-size: 14px;
+                top: -30px;
             }
 
         }
