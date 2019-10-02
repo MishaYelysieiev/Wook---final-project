@@ -138,7 +138,7 @@ class Cart extends React.Component {
             books.push({book_id:el.id,quantity:`${el.querySelector('.item_counter').value}`})
         });
 
-        let user = {};
+        let user = this.state.user;
         let address = {};
         if(user.address) {
             address = user.address;
@@ -211,7 +211,7 @@ class Cart extends React.Component {
 
     render() {
         let component = null;
-        let user = {};
+        let user = this.state.user;
         let address = {};
         if(user.address) {
             address = user.address;
