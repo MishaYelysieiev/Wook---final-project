@@ -213,7 +213,7 @@
         position: static;
         height: inherit;
         margin-bottom: 0;
-        
+
         &__container {
             flex-direction: column;
             width: inherit;
@@ -223,23 +223,23 @@
             height: auto;
         }
     }
-    
+
     .create-account-block {
         width: auto;
         height: 400px;
         border-radius: 5px;
-        
+
         &__title {
             font-size: 26px;
 
         }
-        
+
         &__text-bg {
             font-size: 12px;
             line-height: 18px;
         }
     }
-    
+
     .login-block {
         width: auto;
         height: 400px;
@@ -249,16 +249,29 @@
         &__form {
             padding: 0 20px;
         }
-        
+
         &__auth {
             width: 90%;
         }
-        
+
         &__title {
             font-size: 26px;
 
         }
     }
 }
+
+//.input-invalid {
+//  border-color: red;
+//  box-shadow: 0 0 4px 2px red;
+//}
+//
+//.email-error {
+//  color: red;
+//  font-size: 13px;
+//  margin-left: 5px;
+//  position: relative;
+//  bottom: 12px;
+//}
 
 

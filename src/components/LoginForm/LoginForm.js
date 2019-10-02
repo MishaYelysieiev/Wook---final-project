@@ -2,13 +2,16 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 // import registrationBg from './img/registration-form-text.png'
-import { GoogleLogin } from 'react-google-login';
+// import {Snackbar} from '../Snackbar/Snackbar';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import {GoogleLogin} from 'react-google-login';
 import FacebookLogin from 'react-facebook-login';
+
 import './LoginForm.scss';
 
-const GOOGLE_KEY =`${process.env.REACT_APP_GOOGLEId}`
-const FACEBOOK_KEY =`${process.env.REACT_APP_FACEBOOK_KEY}`
-
+const GOOGLE_KEY = `${process.env.REACT_APP_GOOGLEId}`
+const FACEBOOK_KEY = `${process.env.REACT_APP_FACEBOOK_KEY}`
 
 
 class LoginForm extends React.Component {
@@ -19,18 +22,24 @@ class LoginForm extends React.Component {
             email: '',
             password: '',
             errors: {
-                fullName: '',
                 email: '',
                 password: '',
-            }
+            },
+            snackbarOpen: false,
+            snackbarMsg: '',
+
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    snackbarClose = (event) => {
+        this.setState({snackbarOpen: false});
+    };
+
     validateForm() {
-        return this.state.email.length > 0 && this.state.password.length > 0;
+        return this.state.email.length > 0 && this.state.password.length > 5;
     };
 
     handleChange = (event) => {
@@ -91,20 +100,23 @@ class LoginForm extends React.Component {
                 }
             })
             .then(data => {
-                document.cookie = '_login =;max-age=0';
-                document.cookie = `_login = ${data.token};max-age=3600`;
-                alert('Login successful!');
-                window.location.href = '/';
+                    document.cookie = '_login =;max-age=0';
+                    document.cookie = `_login = ${data.token};max-age=3600`;
+
+                    // alert('Login successful!');
+                    this.setState({snackbarOpen: true, snackbarMsg: 'Login successful!'});
+                    window.location.href = '/';
                 }
             )
             .catch((error) => {
                 console.log('error: ' + error);
-                alert('Oops! Something went wrong. Check your data');
+                this.setState({snackbarOpen: true, snackbarMsg: 'Oops! Something went wrong! Check your data.'});
+                // alert('Oops! Something went wrong. Check your data');
             });
     };
 
     onFailure = (error) => {
-        alert(error);
+        // alert(error);
     };
 
     googleResponse = (response) => {
@@ -126,12 +138,14 @@ class LoginForm extends React.Component {
             .then(data => {
                 document.cookie = '_login =;max-age=0';
                 document.cookie = `_login = ${data.token};max-age=3600`;
-                alert('Login successful!');
+                // alert('Login successful!');
+                this.setState({snackbarOpen: true, snackbarMsg: 'Login successful!'});
                 window.location.href = '/';
             })
             .catch((error) => {
                 console.log('error: ' + error);
-                alert('Oops! Something went wrong. Check your data');
+                // alert('Oops! Something went wrong. Check your data');
+                this.setState({snackbarOpen: true, snackbarMsg: 'Oops! Something went wrong! Check your data.'});
             });
     };
 
@@ -154,12 +168,14 @@ class LoginForm extends React.Component {
             .then(data => {
                 document.cookie = '_login =;max-age=0';
                 document.cookie = `_login = ${data.token};max-age=3600`;
-                alert('Login successful!');
+                // alert('Login successful!');
+                this.setState({snackbarOpen: true, snackbarMsg: 'Login successful!'});
                 window.location.href = '/';
             })
             .catch((error) => {
                 console.log('error: ' + error);
-                alert('Oops! Something went wrong. Check your data');
+                // alert('Oops! Something went wrong. Check your data');
+                this.setState({snackbarOpen: true, snackbarMsg: 'Oops! Something went wrong! Check your data.'});
             });
     }
 
@@ -167,6 +183,24 @@ class LoginForm extends React.Component {
     render() {
         return (
             <div className='LoginForm'>
+                <Snackbar
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                    open={this.state.snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={this.snackbarClose}
+                    message={this.state.snackbarMsg}
+                    action={[
+                        <IconButton
+                            key='close'
+                            arial-label='Close'
+                            color='white'
+                            onClick={this.snackbarClose}
+                        >
+                            x
+                        </IconButton>
+                    ]}
+
+                />
                 <div className='LoginForm__container'>
                     <div className='login-block'>
                         <div className='login-block__container'>
@@ -174,25 +208,25 @@ class LoginForm extends React.Component {
                             <form className='login-block__form' onSubmit={this.handleSubmit} action='api/login'
                                   method='POST'>
                                 <label>Email</label>
-                                <input className='login-block__input' type='email' name='email'
+                                <input className='login-block__input input-invalid' type='email' name='email'
                                        placeholder='email@example.com' value={this.state.email}
                                        onChange={this.handleChange} required/>
                                 <label>Password</label>
-                                <input className='login-block__input' type='password' name='password'
+                                <input className='login-block__input' type='password' name='password' minLength='6'
                                        value={this.state.password}
                                        onChange={this.handleChange} required/>
-                                <Link className='login-block__forgot-password-btn' to=''>Forgot password?</Link>
+                                {/*<Link className='login-block__forgot-password-btn' to=''>Forgot password?</Link>*/}
                                 <input type='submit' className='login-block__submit-btn btn' value='Sign In'
                                        disabled={!this.validateForm()}/>
                             </form>
                         </div>
                         <div className='login-block__auth'>
                             <GoogleLogin
-                            clientId= {GOOGLE_KEY}
-                            className='googleClass'
-                            buttonText="Google"
-                            onSuccess={this.googleResponse}
-                            onFailure={this.onFailure}  
+                                clientId={GOOGLE_KEY}
+                                className='googleClass'
+                                buttonText="Google"
+                                onSuccess={this.googleResponse}
+                                onFailure={this.onFailure}
                             >
                             </GoogleLogin>
 
@@ -203,7 +237,7 @@ class LoginForm extends React.Component {
                                 icon="fa-facebook"
                                 textButton="Facebook"
                                 fields="name,email,picture"
-                                callback={this.facebookResponse} />
+                                callback={this.facebookResponse}/>
                         </div>
                     </div>
                     <div className='create-account-block'>
