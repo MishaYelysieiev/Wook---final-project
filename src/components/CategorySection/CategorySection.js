@@ -42,7 +42,7 @@ class CategorySection extends React.Component {
         fetch(`/api/book/filter?category=${this.categoryId[categoryName]}&order=${sortBy}&skip=${this.skipedNumberOfProductCards}&limit=${this.addedNumberOfProductCards}`)
             .then(response => response.json())
             .then(data => {
-                console.log(this.state.externalData);
+                // console.log(this.state.externalData);
                 this.setState({externalData: this.state.externalData.concat(data), sortBy: sortBy});
             });
     }
@@ -65,16 +65,18 @@ class CategorySection extends React.Component {
     }
 
     handleChange = (e) => {
+        this.skipedNumberOfProductCards = 0;
+        this.setState({externalData: []});
         this.fetchData(e.target.value);
     };
 
     handleScroll = () => { 
         let lastLi = document.querySelector(".CategorySection_product-list > div.ProductCard:last-child");
         let lastLiOffset = lastLi.offsetTop + lastLi.clientHeight;
-        let pageOffset = window.pageYOffset + window.innerHeight;
+        let pageOffset = window.pageYOffset + window.innerHeight;       
         if (pageOffset > lastLiOffset) {
              this.addMoreData();
-        }
+        } 
     };
 
     onScroll(e) {
@@ -82,8 +84,11 @@ class CategorySection extends React.Component {
     }
 
     addMoreData = () => {
+        let list = this.getProductCardList();
+        if (!(list.length < this.skipedNumberOfProductCards + this.addedNumberOfProductCards)) {
         this.skipedNumberOfProductCards += this.addedNumberOfProductCards;
         this.fetchData(this.state.sortBy);
+        }
     };
 
     getProductCardList() {
@@ -103,10 +108,10 @@ class CategorySection extends React.Component {
                     <div className="sort-by">
                         <h3 className="sort-header">Sort by:</h3>
                         <select value={this.state.sortBy} onChange={(e) => this.handleChange(e)} className="sort-select">
-                            <option value="-rating" className="select-item">popularity</option>
-                            <option value="date" className="select-item">new first</option>
-                            <option value="price" className="select-item">price up</option>
-                            <option value="-price" className="select-item">price down</option>
+                            <option value="-rating" className="select-item">average rating</option>
+                            <option value="date" className="select-item">newness</option>
+                            <option value="price" className="select-item">price: low to high</option>
+                            <option value="-price" className="select-item">price: high to low</option>
                         </select>
                     </div>
                 </div>
