@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ProductCard from "../ProductCard/ProductCard";
+import Loader from '../Loader/Loader';
 
 import './CategorySection.scss';
 
@@ -15,7 +16,8 @@ class CategorySection extends React.Component {
 
         this.state = {
             sortBy: "-rating",
-            externalData: []
+            externalData: [],
+            pending:true
         };
 
         this.categoryId = {
@@ -43,7 +45,7 @@ class CategorySection extends React.Component {
             .then(response => response.json())
             .then(data => {
                 // console.log(this.state.externalData);
-                this.setState({externalData: this.state.externalData.concat(data), sortBy: sortBy});
+                this.setState({externalData: this.state.externalData.concat(data), sortBy: sortBy, pending: false});
             });
     }
 
@@ -57,6 +59,7 @@ class CategorySection extends React.Component {
             this.skipedNumberOfProductCards = 0;
             this.setState({externalData: []});
             this.fetchData(this.state.sortBy);
+            this.setState({ pending: false});
         }
     }
 
@@ -68,6 +71,7 @@ class CategorySection extends React.Component {
         this.skipedNumberOfProductCards = 0;
         this.setState({externalData: []});
         this.fetchData(e.target.value);
+        this.setState({ pending: true});
     };
 
     handleScroll = () => { 
@@ -96,6 +100,9 @@ class CategorySection extends React.Component {
     }
 
     render() {
+        if (this.state.pending) {
+            return <Loader/>
+        } else {
         const {category} = this.props.match.params;
         let list = [];
         if (this.state.externalData) {
@@ -120,6 +127,7 @@ class CategorySection extends React.Component {
                 </div>
             </div>
         );
+    }
     }
 }
 
