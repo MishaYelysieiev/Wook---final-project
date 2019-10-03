@@ -51,7 +51,8 @@
     .Subscribe {
         background-color: #E9E5E5;
         background-image: none;
-        height: 160px;
+        height: 180px;
+        align-items: flex-start;
 
         &_name {
             font-size: 16px;
