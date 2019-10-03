@@ -39,6 +39,7 @@ require('./src/backend/category/routes')(app);
 require('./src/backend/book/routes')(app);
 require('./src/backend/user/routes')(app);
 require('./src/backend/order/routes')(app);
+require('./src/backend/email/routes')(app);
 
 // connects our back end code with the database
 // Connecting to the database
