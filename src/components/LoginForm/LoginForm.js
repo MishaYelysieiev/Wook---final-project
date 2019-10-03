@@ -104,19 +104,22 @@ class LoginForm extends React.Component {
                     document.cookie = `_login = ${data.token};max-age=3600`;
 
                     // alert('Login successful!');
-                    this.setState({snackbarOpen: true, snackbarMsg: 'Login successful!'});
+                  
                     window.location.href = '/';
+                    this.setState({snackbarOpen: true, snackbarMsg: 'Login successful!'});
                 }
             )
             .catch((error) => {
+                error.json()
                 console.log('error: ' + error);
-                this.setState({snackbarOpen: true, snackbarMsg: 'Oops! Something went wrong! Check your data.'});
+                this.setState({snackbarOpen: true, snackbarMsg: error});
                 // alert('Oops! Something went wrong. Check your data');
             });
     };
 
     onFailure = (error) => {
         // alert(error);
+        this.setState({snackbarOpen: true, snackbarMsg: error});
     };
 
     googleResponse = (response) => {
@@ -169,7 +172,7 @@ class LoginForm extends React.Component {
                 document.cookie = '_login =;max-age=0';
                 document.cookie = `_login = ${data.token};max-age=3600`;
                 // alert('Login successful!');
-                this.setState({snackbarOpen: true, snackbarMsg: 'Login successful!'});
+                this.setState({snackbarOpen: true, snackbarMsg: 'You have been successfully logged in'});
                 window.location.href = '/';
             })
             .catch((error) => {

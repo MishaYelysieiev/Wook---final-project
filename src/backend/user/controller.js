@@ -165,16 +165,6 @@ exports.current = (req, res) => {
 
 // Update 
 exports.update = async (req, res) => {
-  // Validate Request
-
-  const {
-    errors,
-    isValid
-  } = registerValidation(req.body);
-  // check for not valid
-  if (isValid > 0)
-    return res.status(400).json(errors);
-
   try {
     // Grab user information
     let {
@@ -192,8 +182,7 @@ exports.update = async (req, res) => {
       email
     });
     if (!user) {
-      errors.email = 'User not found!'
-      return res.status(404).json(errors);
+      return res.status(404).json('User not found!');
     }
     // check if password changed
     const samePassword = await password === user.password;

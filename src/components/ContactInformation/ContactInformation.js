@@ -1,4 +1,6 @@
 import React from 'react';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
 
 import './ContactInformation.scss';
 
@@ -6,7 +8,10 @@ class ContactInformation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            externalData: null
+            externalData: null,
+            snackbarOpen: false,
+            snackbarMsg: '',
+            disabled: false
         }
     }
 
@@ -20,9 +25,17 @@ class ContactInformation extends React.Component {
                 'Content-Type': 'application/json'
             }
         })
-            .then(response => response.json())
-            .then(data => this.setState({externalData: data}));
+        .then(data => this.setState({externalData: data}))
+        .catch((error) => {
+            console.log('error: ' + error);
+            this.setState({snackbarOpen: true, snackbarMsg: 'Oops! Something went wrong! Check your data.'});
+            // alert('Oops! Something went wrong. Check your data');
+        });
     }
+
+    snackbarClose = (event) => {
+        this.setState({snackbarOpen: false});
+    };
 
     componentDidMount() {
         this.fetchData();
@@ -30,6 +43,7 @@ class ContactInformation extends React.Component {
 
     putData = (event) => {
         event.preventDefault();
+        this.setState( {disabled: !this.state.disabled, snackbarOpen: true, snackbarMsg: 'Your data was sent to update. Usually takes few seconds!'} )
         let firstName = document.getElementById("firstName").value;
         let lastName = document.getElementById("lastName").value;
         let email = document.getElementById("email").value;
@@ -72,12 +86,22 @@ class ContactInformation extends React.Component {
             },
             body: JSON.stringify(userData)
         })
-            .then(response => response.json())
-            .then(data => {
-            document.cookie = '_login =;max-age=0';
-            document.cookie = `_login = ${data.token};max-age=3600`;
-            alert("Your data was successfully changed!");
-        }).catch(e => 'Error');
+        .then(response => {
+            this.setState( {disabled: !this.state.disabled} )
+            if (!(response.status === 200)) {
+                throw new Error(response);
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => this.setState({snackbarOpen: true, snackbarMsg: 'Your data was successfully changed!'}))
+        .catch((error) => {
+            console.log('error: ' + error);
+            error.json();
+            this.setState({snackbarOpen: true, snackbarMsg:error})
+            
+            // alert('Oops! Something went wrong. Check your data');
+        });
     };
 
     render() {
@@ -87,6 +111,24 @@ class ContactInformation extends React.Component {
         }
         return (
             <div className="ContactInformation">
+                <Snackbar
+                    anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+                    open={this.state.snackbarOpen}
+                    autoHideDuration={3000}
+                    onClose={this.snackbarClose}
+                    message={this.state.snackbarMsg}
+                    action={[
+                        <IconButton
+                            key='close'
+                            arial-label='Close'
+                            color='white'
+                            onClick={this.snackbarClose}
+                        >
+                            x
+                        </IconButton>
+                    ]}
+
+                />
                 <form onSubmit={(event) => this.putData(event)}>
                     <div className="ContactInformation_info">
                         <div className="info-name">
@@ -112,7 +154,7 @@ class ContactInformation extends React.Component {
                             <input type="password" id="repeatNewPassword" />
                         </div>
                     </div>
-                    <input type="submit" value="Save Changes" className="btn-save-changes" />
+                    <input type="submit" value="Save Changes" className="btn-save-changes" disabled = {(this.state.disabled)? "disabled" : ""} />
                 </form>
             </div>
         );
